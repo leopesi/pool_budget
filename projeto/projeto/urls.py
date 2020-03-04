@@ -23,4 +23,5 @@ urlpatterns = [
 
     # Redireciona a URL raiz do site para front
     path('front/', include('front.urls')),
+    path('accounts/', include('django.contrib.auth.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

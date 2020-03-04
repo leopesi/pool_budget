@@ -1,0 +1,113 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<br>
+<br>
+  <h1>Cliente: {{ object.cliente }}</h1>
+{% if orcamento_lista %}
+
+  <h4><strong>DIMENSÕES:</strong></h4>
+    <table class="table table-striped">
+        <tr style="border-bottom: 1px solid #AAA">
+          <th>Comprimento</th>
+          <th>Largura</th>
+          <th>Prof. Inicial</th>
+          <th>Prof. Final</th>
+         <th>Largura da Calçada</th>
+        </tr>
+        <tr style="border-bottom: 1px solid #AAA">
+          <td>{{ object.dimensoes.comprimento}} m</td>
+          <td>{{ object.dimensoes.largura }} m</td>
+          <td>{{ object.dimensoes.prof_inicial }} m</td>
+          <td>{{ object.dimensoes.prof_final }} m</td>
+          <td>{{ object.dimensoes.largura_calcada }} m</td>
+        </tr>
+    </table>
+    <table class="table table-striped">
+        <tr style="border-bottom: 1px solid #AAA">
+          <th>Largura da Calçada<br><i>(metro)</i></th>
+          <th>Profundidade Média<br><i>(metro)</i></th>
+          <th>Área de Calçada <br><i>(m²)</i></th>
+          <th>Perímetro <br><i>(metro linear)</i></th>
+          <th>M² Facial</th>
+          <th>M² de parede</th>
+          <th>M² Total</th>
+          <th>M³ Total</th>
+          <th>M³ Real</th>
+        </tr>
+        <tr style="border-bottom: 1px solid #AAA">
+          <td>{{ object.dimensoes_calc.largura_calcada }}</td>
+          <td>{{ object.dimensoes_calc.profundidade_media }}</td>
+          <td>{{ object.dimensoes_calc.area_calcada }}</td>
+          <td>{{ object.dimensoes_calc.perimetro }}</td>
+          <td>{{ object.dimensoes_calc.m2_facial }}</td>
+          <td>{{ object.dimensoes_calc.m2_parede }}</td>
+          <td>{{ object.dimensoes_calc.m2_total }}</td>
+          <td>{{ object.dimensoes_calc.m3_total }}</td>
+          <td>{{ object.dimensoes_calc.m3_real }}</td>
+        </tr>
+    </table>
+
+  <h4><strong>KIT DE REVESTIMENTO</strong> </h4>
+    <table class="table table-striped">
+      <tr style="border-bottom: 1px solid #AAA">
+        <th>Vinil<br><i>(m²)</i></th>
+        <th>Isomanta<br><i>(m²)</i></th>
+        <th>Perfil Fixo<br><i>(metro linear)</i></th>
+      </tr>
+      <tr style="border-bottom: 1px solid #AAA">
+        <td>{{ object.kit_revestimento.vinil_m2}}</td>
+        <td>{{ object.kit_revestimento.isomanta_m2 }}</td>
+        <td>{{ object.kit_revestimento.perfil_fixo_m }}</td>
+      </tr>
+    </table>
+
+  <h4><strong>CONJUNTO FILTRANTE</strong> </h4>
+    <table class="table table-striped">
+      <tr style="border-bottom: 1px solid #AAA">
+        <th>Filtro</th>
+        <th>Motobomba</th>
+        <th>Tampa da Casa de Máquinas</th>
+        <th>Sacos de areia</th>
+      </tr>
+      <tr style="border-bottom: 1px solid #AAA">
+        <td>{{ object.conj_filtrante.filtro}}</td>
+        <td>{{ object.conj_filtrante.motobomba }}</td>
+        <td>{{ object.conj_filtrante.tampa_casa_maquinas }}</td>
+        <td>{{ object.conj_filtrante.sacos_areia}}</td>
+      </tr>
+    </table>
+
+  <h4><strong>MÃO DE OBRA</strong> </h4>
+    <table class="table table-striped">
+      <tr style="border-bottom: 1px solid #AAA">
+        <th>Escavação
+          <br><i>(m³ de terra)</i></th>
+        <th>Construção
+          <br><i>(m² de paredes)</i></th>
+        <th>Filtro</th>
+        <th>Motobomba</th>
+        <th>Instalação de Vinil
+          <br><i>(m²)</i></th>
+      </tr>
+      <tr style="border-bottom: 1px solid #AAA">
+        <td>{{ object.mao_obra.escavacao}}</td>
+        <td>{{ object.mao_obra.construcao }}</td>
+        <td>{{ object.mao_obra.filtro}}</td>
+        <td>{{ object.mao_obra.motobomba}}</td>
+        <td>{{ object.mao_obra.instalacao_vinil}}</td>
+      </tr>
+    </table>
+
+  <p><strong>ISBN:</strong> </p>
+  <p><strong>Language:</strong> </p>
+  <p><strong>Genre:</strong> </p>
+
+{% else %}
+  <p>Objeto não encontrado.</p>'
+{% endif %}
+
+
+
+        
+{% endblock %}

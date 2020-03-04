@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<br>
+<br>
+<h1>Lista de Orçamentos</h1>
+
+{% if orcamento_lista %}
+
+    <table>
+      <tr>
+      <th>Cliente</th>
+      <th>Vendedor</th>
+      </tr>
+      {% for orcamento in orcamento_lista %}
+      <tr>
+      <td><a href="{{ orcamento.get_absolute_url }}">{{ orcamento.cliente }}</a></td>
+      <td>{{ orcamento.usuario }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+  <p><strong><a href="">Include a new author</a></strong></p>
+{% else %}
+  <p>There are no authors available.</p>'
+{% endif %}
+        
+        
+        
+{% endblock %}
