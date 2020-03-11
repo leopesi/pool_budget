@@ -22,7 +22,7 @@ class ClienteModel(models.Model):
 
     def get_absolute_url(self):
         """Returns the url to access a particular author instance."""
-        return reverse('cliente-detalhe', args=[str(self.id)])
+        return reverse('cliente-detalhado', args=[str(self.id)])
 
     def __str__(self):
         """String representando o objeto."""
@@ -153,7 +153,7 @@ class Mao_obraCalcModel(models.Model):
     escavacao = models.CharField(max_length=30)
     construcao = models.CharField(max_length=30)
     contra_piso = models.CharField(max_length=30)
-    filtro = models.CharField(max_length=30)
+    filtro = models.ForeignKey('FiltranteCalcModel', on_delete=models.PROTECT)
     motobomba = models.CharField(max_length=30)
     remocao_terra = models.CharField(max_length=30)
     instalacao_vinil = models.CharField(max_length=30)

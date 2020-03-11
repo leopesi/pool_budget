@@ -1,7 +1,7 @@
-from .models import DimensaoModel, EspessuraModel, FornecedorModel, OrcamentoModel
+from .models import ClienteModel, DimensaoModel, EspessuraModel, FornecedorModel, OrcamentoModel, RevestimentoCalcModel
 from django.views import generic
 from django.shortcuts import render
-
+from django.urls import reverse_lazy
 
 def index(request):
     """View function for home page of site."""
@@ -21,6 +21,7 @@ def index(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
 
+#-----------------------ORÇAMENTO------------------------------#
 
 class OrcamentoListView(generic.ListView):
     model = OrcamentoModel
@@ -32,3 +33,38 @@ class OrcamentoDetailView(generic.DetailView):
     model = OrcamentoModel
     context_object_name = 'orcamento_lista'
     template_name = 'front/orcamento_detalhado.html'
+
+class OrcamentoCreateView(generic.CreateView):
+    model = OrcamentoModel
+    fields = '__all__'
+    context_object_name = 'orcamento_create'
+    template_name = 'front/orcamento_form.html'
+
+class OrcamentoUpdateView(generic.UpdateView):
+    model =  OrcamentoModel
+    fields = '__all__'
+    context_object_name = 'orcamento_update'
+    template_name = 'front/orcamento_update.html'
+
+
+
+
+
+#-----------------------CLIENTE------------------------------#
+
+class ClienteListView(generic.ListView):
+    model = ClienteModel
+    paginate_by = 10
+    context_object_name = 'cliente_lista'
+    template_name = 'front/cliente_lista.html'
+
+class ClienteDetailView(generic.DetailView):
+    model = ClienteModel
+    context_object_name = 'cliente_lista'
+    template_name = 'front/cliente_detalhado.html'
+
+class ClienteUpdateView(generic.UpdateView):
+    model = ClienteModel
+    fields = '__all__'
+    context_object_name = 'cliente_update'
+    template_name = 'front/cliente_update.html'

@@ -3,19 +3,19 @@
 {% block content %}
 <br>
 <br>
-<h1>Orçamentos</h1>
+<h1>Clientes</h1>
 
-{% if orcamento_lista %}
+{% if cliente_lista %}
 
     <table>
       <tr>
       <th>Cliente</th>
-      <th>Vendedor</th>
+      <th>Sobrenome</th>
       </tr>
-      {% for orcamento in orcamento_lista %}
+      {% for cliente in cliente_lista %}
       <tr>
-      <td><a href="{{ orcamento.get_absolute_url }}">{{ orcamento.cliente }}</a></td>
-      <td>{{ orcamento.usuario }}</td>
+      <td><a href="{{ cliente.get_absolute_url }}">{{ cliente.nome }}</a>  </td>
+      <td>{{ cliente.sobrenome }}</td>
       </tr>
       {% endfor %}
     </table>

@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<br>
+<br>
+  <h1>{{ object.nome }}</h1>
+{% if cliente_update %}
+
+{{ form.source }}
+
+  <h4><strong>INFORMAÇÕES CADASTRAIS:</strong></h4>
+      <form action="" method="post">
+        {% csrf_token %}
+        <ul>
+          <li><b>Nome:</b> {{ form.nome }} </li>
+          <li><b>Sobrenome:</b> {{ form.sobrenome }}</li>
+          <li><b>Cidade:</b> {{ form.cidade }}</li>
+          <li><b>Estado:</b> {{ form.estado }}</li>
+          <li><b>Rua:</b> {{ form.rua }}</li>
+          <li><b>N°:</b> {{ form.numero_casa }}</li>
+          <li><b>Cep:</b> {{ form.cep }}</li>
+          <li><b>Telefone:</b> {{ form.telefone }}</li>
+          <li><b>E-mail:</b> {{ form.email }}</li>
+        </ul>
+        <input type="submit" value="Submit">
+      </form>
+
+{% else %}
+  <p>Objeto não encontrado.</p>
+{% endif %}
+
+
+
+
+{% endblock %}

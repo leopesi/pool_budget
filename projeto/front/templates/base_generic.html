@@ -19,6 +19,7 @@
             {% block sidebar %}
                 <span class="icon-bar"><a href="{% url 'index' %}">HOME</a></span>
                 <span class="icon-bar"><a href="{% url 'orcamento' %}">Lista de Orçamentos</a></span>
+                <span class="icon-bar"><a href="{% url 'cliente' %}">Lista de Clientes</a></span>
                 <span class="icon-bar"><a href="http://127.0.0.1:8000/admin">ADMIN</a></span>
             {% endblock %}
             <a class="navbar-brand" href="#">Logo</a>
@@ -42,9 +43,9 @@
                     {% endif %}
                 </span>
             </div>
-        {% endif %}
-    {% endblock %}
-            </div>
+            {% endif %}
+        {% endblock %}
+    </div>
 
     <footer class="bg-4 text-center">
         <p> Criado por Leonardo Pereira <a href="https://github.com/leopesi">GitHub</a></p>
