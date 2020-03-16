@@ -1,0 +1,17 @@
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+<br>
+<br>
+
+<h1>Apagar Orçamento</h1>
+
+<p>Você tem certeza que deseja apagar o orçamento <strong>{{ object.cliente }}</strong>?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" action="" value="Sim, apagar!" />
+</form>
+
+{% endblock %}

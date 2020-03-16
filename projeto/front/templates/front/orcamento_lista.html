@@ -4,23 +4,25 @@
 <br>
 <br>
 <h1>Orçamentos</h1>
-
+ <p><a href="{% url 'orcamento_incluir' %}">Criar novo orçamento</a></p>
 {% if orcamento_lista %}
 
     <table>
       <tr>
       <th>Cliente</th>
       <th>Vendedor</th>
+      <th>Status</th>
       </tr>
       {% for orcamento in orcamento_lista %}
       <tr>
       <td><a href="{{ orcamento.get_absolute_url }}">{{ orcamento.cliente }}</a></td>
       <td>{{ orcamento.usuario }}</td>
+      <td>{{ orcamento.status }}</td>
       </tr>
       {% endfor %}
     </table>
 
-  <p><strong><a href="">Include a new author</a></strong></p>
+
 {% else %}
   <p>There are no authors available.</p>'
 {% endif %}

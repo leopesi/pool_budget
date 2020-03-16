@@ -37,18 +37,28 @@ class OrcamentoDetailView(generic.DetailView):
 class OrcamentoCreateView(generic.CreateView):
     model = OrcamentoModel
     fields = '__all__'
-    context_object_name = 'orcamento_create'
-    template_name = 'front/orcamento_form.html'
+    context_object_name = 'orcamento_incluir'
+    template_name = 'front/orcamento_incluir.html'
 
-class OrcamentoUpdateView(generic.UpdateView):
-    model =  OrcamentoModel
+class OrcamentoDeleteView(generic.DeleteView):
+    model = OrcamentoModel
     fields = '__all__'
-    context_object_name = 'orcamento_update'
-    template_name = 'front/orcamento_update.html'
+    success_url = reverse_lazy('orcamento')
+    context_object_name = 'orcamento_confirma_delete.'
+    template_name = 'front/orcamento_confirma_delete.html'
 
+#-----------------------REVESTIMENTO------------------------------#
+class RevestimentoUpdateView(generic.UpdateView):
+    model =  RevestimentoCalcModel
+    fields = ['vinil_m2','isomanta_m2','perfil_fixo_m']
+    context_object_name = 'revestimento_update'
+    template_name = 'front/revestimento_update.html'
 
-
-
+class RevestimentoDeleteView(generic.DeleteView):
+    model =  RevestimentoCalcModel
+    fields = ['vinil_m2','isomanta_m2','perfil_fixo_m']
+    context_object_name = 'revestimento_update'
+    template_name = 'front/revestimento_update.html'
 
 #-----------------------CLIENTE------------------------------#
 

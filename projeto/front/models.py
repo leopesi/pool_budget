@@ -116,16 +116,20 @@ class DimensaoCalcModel(models.Model):
 
 class RevestimentoCalcModel(models.Model):
     """Modelo representando os itens de revestimento, calculadas no backend, a partir da DimensãoModel."""
-
+    cliente = models.ForeignKey(ClienteModel, on_delete=models.SET_NULL, null=True)
     vinil_m2 = models.FloatField(max_length=5)
     espessura = models.ForeignKey('EspessuraModel', on_delete=models.SET_NULL, null=True)
     marca = models.ForeignKey('FornecedorModel', on_delete=models.SET_NULL, null=True)
     isomanta_m2 = models.FloatField(max_length=5)
     perfil_fixo_m = models.FloatField(max_length=5)
 
+
+    class Meta:
+        verbose_name_plural = 'revestimentos'
+
     def get_absolute_url(self):
         """Returns the url to access a particular author instance."""
-        return reverse('revestimentocalc-detalhe', args=[str(self.id)])
+        return reverse('orcamento-detalhado', args=[str(self.id)])
 
     def __str__(self):
         """String representando o objeto."""
@@ -172,14 +176,14 @@ class OrcamentoModel(models.Model):
     """Modelo representando o orçamento final apresentado ao usuário da aplicação."""
 
     usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    cliente = models.ForeignKey('ClienteModel', on_delete=models.SET_NULL, null=True)
+    cliente = models.ForeignKey(ClienteModel, on_delete=models.SET_NULL, null=True)
     data = models.DateTimeField(auto_now=False, auto_now_add=True)
 
-    dimensoes = models.ForeignKey('DimensaoModel', on_delete=models.SET_NULL, null=True)
-    dimensoes_calc = models.ForeignKey('DimensaoCalcModel', on_delete=models.SET_NULL, null=True)
-    conj_filtrante = models.ForeignKey('FiltranteCalcModel', on_delete=models.SET_NULL, null=True)
-    kit_revestimento = models.ForeignKey('RevestimentoCalcModel', on_delete=models.SET_NULL, null=True)
-    mao_obra = models.ForeignKey('Mao_obraCalcModel', on_delete=models.SET_NULL, null=True)
+    dimensoes = models.ForeignKey(DimensaoModel, on_delete=models.SET_NULL, null=True)
+    dimensoes_calc = models.ForeignKey(DimensaoCalcModel, on_delete=models.SET_NULL,  null=True)
+    conj_filtrante = models.ForeignKey(FiltranteCalcModel, on_delete=models.SET_NULL, null=True)
+    kit_revestimento = models.OneToOneField(RevestimentoCalcModel, on_delete=models.CASCADE, null=True)
+    mao_obra = models.ForeignKey(Mao_obraCalcModel, on_delete=models.SET_NULL, null=True)
 
 
     BUDGET_STATUS = (
