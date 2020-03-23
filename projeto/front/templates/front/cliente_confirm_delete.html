@@ -1,0 +1,17 @@
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+<br>
+<br>
+
+<h1>Apagar Cliente</h1>
+
+<p>Você tem certeza que deseja apagar o cliente <strong>{{ object.cliente }}</strong>?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" action="" value="Sim, apagar!" />
+</form>
+
+{% endblock %}

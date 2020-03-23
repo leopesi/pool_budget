@@ -1,5 +1,17 @@
 from django import forms
-from .models import UsuarioModel
+from django.forms import ModelForm
+from .models import DimensaoModel, ClienteModel
+
+
+class ClienteForm(ModelForm):
+    model: ClienteModel
+    nome = forms.CharField(max_length=3)
+
+
+
+
+
+
 
 class CadastrarUsuario(forms.ModelForm):
     nome = forms.CharField(widget = forms.TextInput(attrs = {'class': 'input_field'}),label = 'Nome')
@@ -11,7 +23,7 @@ class CadastrarUsuario(forms.ModelForm):
     confirma_senha = forms.CharField(widget = forms.PasswordInput(attrs = {'class': 'input_field'}), label = 'Confirmar senha')
 
     class Meta:
-        model = UsuarioModel
+
         fields = ['nome', 'sobrenome', 'email', 'confirma_email', 'usuario', 'senha', 'confirma_senha']
 
     def clean(self):

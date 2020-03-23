@@ -2,6 +2,7 @@ from django.db import models
 from localflavor.br.forms import BRPostalCodeField
 from django.contrib.auth.models import User
 from django.urls import reverse # Used to generate URLs by reversing the URL patterns
+from django.utils import timezone
 
 class ClienteModel(models.Model):
     """Modelo representando as informações de cadastro do cliente."""
@@ -22,82 +23,31 @@ class ClienteModel(models.Model):
 
     def get_absolute_url(self):
         """Returns the url to access a particular author instance."""
-        return reverse('cliente-detalhado', args=[str(self.id)])
+        return reverse('cliente-id', args=[str(self.id)])
 
     def __str__(self):
         """String representando o objeto."""
         return f'{self.nome}, {self.sobrenome}'
 
 class DimensaoModel(models.Model):
-    """Modelo representando as dimensoões de INPUT da piscina."""
+    cliente = models.ForeignKey(ClienteModel, on_delete=models.SET_NULL, null=True)
+    usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    """INPUT da piscina."""
     comprimento = models.FloatField(max_length=3, null=False, blank=False, help_text='Ex. 8.00')
     largura = models.FloatField(max_length=3, null=False, blank=False, help_text='Ex. 4.00')
     prof_inicial = models.FloatField(max_length=3, null=False, blank=False, help_text='Ex. 1.20')
     prof_final = models.FloatField(max_length=3, null=False, blank=False, help_text='Ex. 1.40')
     largura_calcada = models.FloatField(max_length=3, null=False, blank=True, default= 1, help_text='Ex. 1.00')
 
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('dimensao-detalhe', args=[str(self.id)])
+    escolher_espessura = [['0.6', '0.6 mm'],['0.7', '0.7 mm'],['0.8', '0.8 mm'],]
+    espessura = models.CharField(max_length=3, choices=escolher_espessura, help_text='Espessura do vinil',)
 
-    def __str__(self):
-        """String representando o objeto."""
-        return f'{self.comprimento}, {self.largura}, {self.prof_inicial},{self.prof_final},{self.largura_calcada}'
+    escolher_fornecedor = [['sodramar', 'Sodramar'], ['viniplas', 'Viniplas'],]
+    fornecedor = models.CharField(max_length=8, choices=escolher_fornecedor, help_text='Fornecedor do vinil',)
 
-class EspessuraModel(models.Model):
-    """Modelo representando a espessura do vinil da piscina."""
-
-    teste = models.CharField(max_length=20, blank=True)
-
-    escolher_espessura = [
-        ['0.6', '0.6 mm'],
-        ['0.7', '0.7 mm'],
-        ['0.8', '0.8 mm'],
-    ]
-
-    espessura = models.CharField(
-        max_length=3,
-        choices=escolher_espessura,
-        help_text='Espessura do vinil',
-    )
-
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('espessura-detalhe', args=[str(self.id)])
-
-    def __str__(self):
-        """String representando o objeto."""
-        return f'{self.espessura}'
-
-class FornecedorModel(models.Model):
-    """Modelo representando o fornecedor do vinil."""
-    teste = models.CharField(max_length=20, blank=True)
-
-    escolher_fornecedor = [
-        ['sodramar', 'Sodramar'],
-        ['viniplas', 'Viniplas'],
-    ]
-
-    fornecedor = models.CharField(
-        max_length=8,
-        choices=escolher_fornecedor,
-        help_text='Fornecedor do vinil',
-    )
-
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('fornecedor-detalhe', args=[str(self.id)])
-
-    def __str__(self):
-        """String representando o objeto."""
-        return f'{self.fornecedor}'
-
-####################################################
-class DimensaoCalcModel(models.Model):
-    """Modelo representando as dimensões calculadas no backend, a partir da DimensãoModel."""
-
-    largura_calcada = models.FloatField(max_length=5)
-    profundidade_media = models.FloatField(max_length=5)
+    '''DIMENSÕES CALCULADAS'''
+    profundidade_media = models.FloatField(max_length=5, default=0)
     area_calcada = models.FloatField(max_length=5)
     perimetro = models.FloatField(max_length=5)
     m2_facial = models.FloatField(max_length=5)
@@ -106,108 +56,65 @@ class DimensaoCalcModel(models.Model):
     m3_total = models.FloatField(max_length=5)
     m3_real = models.FloatField(max_length=5)
 
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('dimensaocalc-detalhe', args=[str(self.id)])
-
-    def __str__(self):
-        """String representando o objeto."""
-        return f'{self.largura_calcada}, {self.profundidade_media}'
-
-class RevestimentoCalcModel(models.Model):
-    """Modelo representando os itens de revestimento, calculadas no backend, a partir da DimensãoModel."""
-    cliente = models.ForeignKey(ClienteModel, on_delete=models.SET_NULL, null=True)
-    vinil_m2 = models.FloatField(max_length=5)
-    espessura = models.ForeignKey('EspessuraModel', on_delete=models.SET_NULL, null=True)
-    marca = models.ForeignKey('FornecedorModel', on_delete=models.SET_NULL, null=True)
-    isomanta_m2 = models.FloatField(max_length=5)
-    perfil_fixo_m = models.FloatField(max_length=5)
-
-
-    class Meta:
-        verbose_name_plural = 'revestimentos'
-
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('orcamento-detalhado', args=[str(self.id)])
-
-    def __str__(self):
-        """String representando o objeto."""
-        return f'{self.vinil_m2}, {self.espessura}'
-
-class FiltranteCalcModel(models.Model):
-    """Modelo representando os itens do Conjunto Filtrante, calculadas no backend, a partir da DimensãoModel."""
-
+    """CONJUNTO FILTRANTE"""
     filtro = models.CharField(max_length=30)
     motobomba = models.CharField(max_length=30)
     tampa_casa_maquinas = models.CharField(max_length=30)
     sacos_areia = models.CharField(max_length=30)
 
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('filtrantecalc-detalhe', args=[str(self.id)])
+    """REVESTIMENTO"""
+    vinil_m2 = models.FloatField(max_length=5)
+    isomanta_m2 = models.FloatField(max_length=5)
+    perfil_fixo_m = models.FloatField(max_length=5)
 
-    def __str__(self):
-        """String representando o objeto."""
-        return f'{self.filtro}, {self.motobomba}'
+    """MÃO DE OBRA"""
+    escavacao = models.CharField(max_length=30, default= 0)
+    construcao = models.CharField(max_length=30, default= 0)
+    contra_piso = models.CharField(max_length=30, default= 0)
+    remocao_terra = models.CharField(max_length=30, default= 0)
+    instalacao_vinil = models.CharField(max_length=30, default= 0)
 
-class Mao_obraCalcModel(models.Model):
-    """Modelo representando informações de Mão de Obra, calculadas no backend, a partir da DimensãoModel."""
+    BUDGET_STATUS = (('Em negociação', 'Em negociação'), ('Contrato', 'Contrato'), ('Encerrado', 'Encerrado'),)
+    status = models.CharField(max_length=15, choices=BUDGET_STATUS, blank=True, default='Em negociação', help_text='Status do Orçamento',)
+    data = models.DateTimeField(blank=True, null=True)
 
-    escavacao = models.CharField(max_length=30)
-    construcao = models.CharField(max_length=30)
-    contra_piso = models.CharField(max_length=30)
-    filtro = models.ForeignKey('FiltranteCalcModel', on_delete=models.PROTECT)
-    motobomba = models.CharField(max_length=30)
-    remocao_terra = models.CharField(max_length=30)
-    instalacao_vinil = models.CharField(max_length=30)
+    def publish(self):
+        self.data = timezone.now()
+        self.save()
 
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('maoobracalc-detalhe', args=[str(self.id)])
+    array = [0]
+    def media(self):
+        inicial = self.prof_inicial
+        final = self.prof_final
+        profundidade = self.profundidade_media
+        if profundidade == 0: #Verifica o Field Prof.média e se for == 0, faz input pelo cálculo da média.
+            self.array.append(profundidade)
+            print(f'1° Teste - Prof. Média= {self.profundidade_media} - Array={self.array}')
+            self.profundidade_media = (inicial + final) / 2
+            print(self.profundidade_media, self.array[-1])
+            self.array.pop(0)
+            super().save()
+        elif profundidade == self.array[-1]: #Verifica o Field Prof.média e se for igual o último valor guardado, faz input pelo cálculo da média.
+            self.array.append(profundidade)
+            print(f'2° Teste - Prof. Média= {self.profundidade_media} - Array={self.array}')
+            self.profundidade_media = (inicial + final) / 2
+            print(self.profundidade_media, self.array[-1])
+            self.array.pop(0)
+            super().save()
+        elif profundidade != self.array[-1]: #Verifica o Field Prof.média e se for diferente o último valor guardado, faz input pelo Field Prof.média.
+            self.array.append(profundidade)
+            print(f'3° Teste - Prof. Média= {self.profundidade_media} - Array={self.array}')
+            self.profundidade_media = self.profundidade_media
+            self.array.pop(0)
+            print(self.profundidade_media, self.array[-1])
+            super().save()
 
-    def __str__(self):
-        """String representando o objeto."""
-        return f'{self.escavacao}, {self.construcao}'
-
-################################################################
-
-class OrcamentoModel(models.Model):
-    """Modelo representando o orçamento final apresentado ao usuário da aplicação."""
-
-    usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    cliente = models.ForeignKey(ClienteModel, on_delete=models.SET_NULL, null=True)
-    data = models.DateTimeField(auto_now=False, auto_now_add=True)
-
-    dimensoes = models.ForeignKey(DimensaoModel, on_delete=models.SET_NULL, null=True)
-    dimensoes_calc = models.ForeignKey(DimensaoCalcModel, on_delete=models.SET_NULL,  null=True)
-    conj_filtrante = models.ForeignKey(FiltranteCalcModel, on_delete=models.SET_NULL, null=True)
-    kit_revestimento = models.OneToOneField(RevestimentoCalcModel, on_delete=models.CASCADE, null=True)
-    mao_obra = models.ForeignKey(Mao_obraCalcModel, on_delete=models.SET_NULL, null=True)
-
-
-    BUDGET_STATUS = (
-        ('n', 'Em negociação'),
-        ('c', 'Contrato'),
-        ('e', 'Encerrado'),
-    )
-
-    status = models.CharField(
-        max_length=1,
-        choices=BUDGET_STATUS,
-        blank=True,
-        default='n',
-        help_text='Status do Orçamento',
-    )
-
-    class Meta:
-        ordering = ['cliente', 'data']
-        permissions = (("can_mark_returned", "Set book as returned"),)
 
     def get_absolute_url(self):
         """Returns the url to access a detail record for this book."""
-        return reverse('orcamento-detalhado', args=[str(self.id)])
+        return reverse('orcamento-id', args=[str(self.id)])
 
     def __str__(self):
         """String representando o objeto."""
-        return f'{self.cliente.nome}, {self.cliente.sobrenome}, {self.data}, {self.status}'
+        return f'{self.comprimento}, {self.largura}, {self.prof_inicial},{self.prof_final},{self.largura_calcada}'
+

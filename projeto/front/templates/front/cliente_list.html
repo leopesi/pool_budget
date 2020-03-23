@@ -4,15 +4,17 @@
 <br>
 <br>
 <h1>Clientes</h1>
+<hr>
+{% if lista_cliente %}
 
-{% if cliente_lista %}
-
-    <table>
+    <table class="table">
+      <thead class="thead-light">
       <tr>
-      <th>Cliente</th>
-      <th>Sobrenome</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Sobrenome</th>
       </tr>
-      {% for cliente in cliente_lista %}
+      </thead>
+      {% for cliente in lista_cliente %}
       <tr>
       <td><a href="{{ cliente.get_absolute_url }}">{{ cliente.nome }}</a>  </td>
       <td>{{ cliente.sobrenome }}</td>
@@ -20,7 +22,8 @@
       {% endfor %}
     </table>
 
-  <p><strong><a href="">Include a new author</a></strong></p>
+<hr>
+<p><strong><a href="{% url 'cliente_create' %}">Incluir cliente</a></strong></p>
 {% else %}
   <p>There are no authors available.</p>'
 {% endif %}
