@@ -1,0 +1,70 @@
+{
+   "escavacao":
+
+   {
+     "id": 1,
+     "custo": 14,
+     "margem": 50,
+     "preco": 21
+   },
+
+
+   "construcao_piscina":
+
+   {
+     "id": 1,
+     "custo": 38,
+     "margem": 50,
+     "preco": 57
+   },
+
+
+   "remocao_de_terra":
+
+   {
+     "id": 1,
+     "custo": 16,
+     "margem": 50,
+     "preco": 24
+   },
+
+
+   "instalacao_filtro":
+
+   {
+     "id": 1,
+     "custo": 170,
+     "margem": 50,
+     "preco": 255
+   },
+
+
+   "instalacao_motobomba":
+
+   {
+     "id": 1,
+     "custo": 100,
+     "margem": 50,
+     "preco": 150
+   },
+
+   "instalacao_vinil":
+
+   {
+     "id": 1,
+     "custo": 350,
+     "margem": 50,
+     "preco": 525
+   },
+
+   "construcao_calcada":
+
+   {
+     "id": 1,
+     "custo": 17,
+     "margem": 50,
+     "preco": 25.5
+   }
+
+}
+

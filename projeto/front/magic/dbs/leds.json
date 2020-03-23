@@ -1,0 +1,83 @@
+{
+    "leds":
+  [
+    {
+      "id": 1,
+      "status": "principal",
+      "fornecedor": "nautilus",
+      "marca": "nautilus",
+      "modelo": "super led abs",
+      "cor da luz": "branco",
+      "potencia": 12,
+      "area de iluminacao": 14,
+      "custo": 180,
+      "margem de lucro": 50,
+      "preco": 271
+    },
+    {
+      "id": 2,
+      "status": "secundario",
+      "fornecedor": "nautilus",
+      "marca": "nautilus",
+      "modelo": "super led abs",
+      "cor da luz": "azul",
+      "potencia": 9,
+      "area de iluminacao": 12,
+      "custo":180,
+      "margem de lucro": 50,
+      "preco": 272
+    },
+    {
+      "id": 3,
+      "status": "secundario",
+      "fornecedor": "nautilus",
+      "marca": "nautilus",
+      "modelo": "super led abs",
+      "cor da luz": "colorido - rgb",
+      "potencia": 9,
+      "area de iluminacao": 10,
+      "custo":180,
+      "margem de lucro": 50,
+      "preco": 273
+    },
+    {
+      "id": 4,
+      "status": "secundario",
+      "fornecedor": "viniplas",
+      "marca": "viniplas",
+      "modelo": "super led abs",
+      "cor da luz": "branco",
+      "potencia": 9,
+      "area de iluminacao": 9,
+      "custo":180,
+      "margem de lucro": 50,
+      "preco": 274
+    },
+    {
+      "id": 5,
+      "status": "secundario",
+      "fornecedor": "viniplas",
+      "marca": "viniplas",
+      "modelo": "super led abs",
+      "cor da luz": "azul",
+      "potencia": 9,
+      "area de iluminacao": 12,
+      "custo":180,
+      "margem de lucro": 50,
+      "preco": 275
+    },
+    {
+      "id": 6,
+      "status": "secundario",
+      "fornecedor": "viniplas",
+      "marca": "viniplas",
+      "modelo": "super led abs",
+      "cor da luz": "colorido - rgb",
+      "potencia": 9,
+      "area de iluminacao": 11,
+      "custo":180,
+      "margem de lucro %": 50,
+      "preco": 276
+    }
+  ],
+}

@@ -109,7 +109,6 @@ class DimensaoModel(models.Model):
             print(self.profundidade_media, self.array[-1])
             super().save()
 
-
     def get_absolute_url(self):
         """Returns the url to access a detail record for this book."""
         return reverse('orcamento-id', args=[str(self.id)])

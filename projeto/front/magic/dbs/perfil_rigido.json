@@ -1,0 +1,15 @@
+{
+"perfil_rigido":
+  [
+    {
+      "id": 1,
+      "fornecedor": "agua viva",
+      "marca": "sem marca",
+      "modelo": " ",
+      "tamanho": "3 metros",
+      "custo": 10,
+      "margem de lucro": 50,
+      "preco": 15
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+    "filtros":
+  [
+    {
+      "id": 1,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "FM 25",
+      "capacidade maxima": 19,
+      "custo": 330,
+      "margem de lucro": 40,
+      "preco": 462
+    },
+    {
+      "id": 2,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "FM 30",
+      "capacidade maxima": 28,
+      "custo": 350,
+      "margem de lucro": 40,
+      "preco": 490
+    },
+    {
+      "id": 3,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "FM 36",
+      "capacidade maxima": 40,
+      "custo": 400,
+      "margem de lucro": 40,
+      "preco": 560
+    },
+    {
+      "id": 4,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "FM 40",
+      "capacidade maxima": 52,
+      "custo": 440,
+      "margem de lucro": 40,
+      "preco": 616
+    },
+
+    {
+      "id": 5,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "FM 50",
+      "capacidade maxima": 78,
+      "custo": 470,
+      "margem de lucro": 40,
+      "preco": 658
+    },
+    {
+      "id": 6,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "FM 60",
+      "capacidade maxima": 113,
+      "custo": 590,
+      "margem de lucro": 40,
+      "preco": 826
+    },
+    {
+      "id": 7,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "FM 75",
+      "capacidade maxima": 176,
+      "custo": 780,
+      "margem de lucro": 40,
+      "preco": 1092
+    },
+    {
+      "id": 8,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "FM 100",
+      "capacidade maxima": 312,
+      "custo": 2200,
+      "margem de lucro": 40,
+      "preco": 3080
+    }
+  ]
+}

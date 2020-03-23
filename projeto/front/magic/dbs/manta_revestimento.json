@@ -1,0 +1,15 @@
+{
+    "manta_revestimento":
+  [
+    {
+      "id": 1,
+      "fornecedor": "stilo plast",
+      "marca": "stilo plast",
+      "modelo": "2 mm ",
+      "tamanho": "1 m²",
+      "custo": 5,
+      "margem de lucro": 50,
+      "preco": 7.5
+    }
+  ]
+}

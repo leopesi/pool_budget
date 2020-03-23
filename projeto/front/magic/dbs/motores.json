@@ -1,0 +1,76 @@
+{
+    "motores":
+  [
+    {
+      "id": 1,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "BMC 25 - 1/4 CV",
+      "capacidade maxima": 28,
+      "custo": 550,
+      "margem de lucro": 40,
+      "preco": 770
+    },
+    {
+      "id": 2,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "BMC 33 - 1/3 CV",
+      "capacidade maxima": 40,
+      "custo": 570,
+      "margem de lucro": 40,
+      "preco": 798
+    },
+    {
+      "id": 3,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "BMC 50 - 1/2 CV",
+      "capacidade maxima": 52,
+      "custo": 600,
+      "margem de lucro": 40,
+      "preco": 840
+    },
+    {
+      "id": 4,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "BMC 75 - 3/4 CV",
+      "capacidade maxima": 78,
+      "custo": 600,
+      "margem de lucro": 40,
+      "preco": 840
+    },
+    {
+      "id": 5,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "BMC 100 - 1 CV",
+      "capacidade maxima": 113,
+      "custo": 750,
+      "margem de lucro": 40,
+      "preco": 1050
+    },
+    {
+      "id": 6,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "BMC 150 - 1,5 CV",
+      "capacidade maxima": 176,
+      "custo": 800,
+      "margem de lucro": 40,
+      "preco": 1120
+    },
+    {
+      "id": 7,
+      "fornecedor": "sodramar",
+      "marca": "sodramar",
+      "modelo": "BMC 200 - 1,5 CV",
+      "capacidade maxima": 226,
+      "custo": 900,
+      "margem de lucro": 40,
+      "preco": 1260
+    }
+
+  ]
+}

@@ -1,0 +1,13 @@
+{
+"areia":
+  [
+    {
+      "fornecedor": "mineração sao joao",
+      "marca": "sao joao",
+      "peso": 25,
+      "custo": 15,
+      "margem de lucro": 50,
+      "preco": 22.5
+    }
+  ]
+}
