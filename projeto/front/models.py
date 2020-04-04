@@ -3,6 +3,8 @@ from localflavor.br.forms import BRPostalCodeField
 from django.contrib.auth.models import User
 from django.urls import reverse # Used to generate URLs by reversing the URL patterns
 from django.utils import timezone
+from .magic.estruturas.dimensao import Dimensao
+
 
 class ClienteModel(models.Model):
     """Modelo representando as informações de cadastro do cliente."""
@@ -34,27 +36,27 @@ class DimensaoModel(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     """INPUT da piscina."""
-    comprimento = models.FloatField(max_length=3, null=False, blank=False, help_text='Ex. 8.00')
-    largura = models.FloatField(max_length=3, null=False, blank=False, help_text='Ex. 4.00')
-    prof_inicial = models.FloatField(max_length=3, null=False, blank=False, help_text='Ex. 1.20')
-    prof_final = models.FloatField(max_length=3, null=False, blank=False, help_text='Ex. 1.40')
-    largura_calcada = models.FloatField(max_length=3, null=False, blank=True, default= 1, help_text='Ex. 1.00')
+    comprimento = models.CharField(max_length=3, null=False, blank=False, help_text='Ex. 8.00', default=0)
+    largura = models.CharField(max_length=3, null=False, blank=False, help_text='Ex. 4.00', default=0)
+    prof_inicial = models.CharField(max_length=3, null=False, blank=False, help_text='Ex. 1.20', default=0)
+    prof_final = models.CharField(max_length=3, null=False, blank=False, help_text='Ex. 1.40', default=0)
+    largura_calcada = models.CharField(max_length=3, null=False, blank=True, default= 1, help_text='Ex. 1.00')
 
     escolher_espessura = [['0.6', '0.6 mm'],['0.7', '0.7 mm'],['0.8', '0.8 mm'],]
-    espessura = models.CharField(max_length=3, choices=escolher_espessura, help_text='Espessura do vinil',)
+    espessura = models.CharField(max_length=3, choices=escolher_espessura, )
 
     escolher_fornecedor = [['sodramar', 'Sodramar'], ['viniplas', 'Viniplas'],]
-    fornecedor = models.CharField(max_length=8, choices=escolher_fornecedor, help_text='Fornecedor do vinil',)
+    fornecedor = models.CharField(max_length=8, choices=escolher_fornecedor, )
 
-    '''DIMENSÕES CALCULADAS'''
+    '''DIMENSÕES'''
     profundidade_media = models.FloatField(max_length=5, default=0)
-    area_calcada = models.FloatField(max_length=5)
-    perimetro = models.FloatField(max_length=5)
-    m2_facial = models.FloatField(max_length=5)
-    m2_parede = models.FloatField(max_length=5)
-    m2_total = models.FloatField(max_length=5)
-    m3_total = models.FloatField(max_length=5)
-    m3_real = models.FloatField(max_length=5)
+    area_calcada = models.CharField(max_length=5)
+    perimetro = models.CharField(max_length=5)
+    m2_facial = models.CharField(max_length=5)
+    m2_parede = models.CharField(max_length=5)
+    m2_total = models.CharField(max_length=5)
+    m3_total = models.CharField(max_length=5)
+    m3_real = models.CharField(max_length=5)
 
     """CONJUNTO FILTRANTE"""
     filtro = models.CharField(max_length=30)
@@ -63,9 +65,9 @@ class DimensaoModel(models.Model):
     sacos_areia = models.CharField(max_length=30)
 
     """REVESTIMENTO"""
-    vinil_m2 = models.FloatField(max_length=5)
-    isomanta_m2 = models.FloatField(max_length=5)
-    perfil_fixo_m = models.FloatField(max_length=5)
+    vinil_m2 = models.CharField(max_length=5)
+    isomanta_m2 = models.CharField(max_length=5)
+    perfil_fixo_m = models.CharField(max_length=5)
 
     """MÃO DE OBRA"""
     escavacao = models.CharField(max_length=30, default= 0)

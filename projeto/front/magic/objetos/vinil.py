@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from projeto.front.magic.dbs.database import Database
-from projeto.front.magic.estruturas.dimensao import Dimensao
+from .dbs.database import Database
 
 class Vinil():
     def __init__(self, espessura, fornecedor):

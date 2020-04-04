@@ -1,29 +1,115 @@
-from .models import ClienteModel, DimensaoModel
+
 from django.views import generic
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from .forms import ClienteForm
+from django.utils import timezone
+from django.shortcuts import redirect
+
+from .models import ClienteModel, DimensaoModel
+from .magic.estruturas.dimensao import Dimensao
+from .magic.objetos.filtro import Filtro
+from .magic.objetos.motor import Motor
+from .magic.objetos.vinil import Vinil
+from .forms import DimensaoForm
 
 def index(request):
-    """View function for home page of site."""
+    if request.method == "POST":
+         form = DimensaoForm(request.POST)
+         if form.is_valid():
+             post = form.save(commit=False)
+             post.usuario = request.user
+             post.data = timezone.now()
 
-    # Generate counts of some of the main objects
-    comprimento1 = DimensaoModel.objects.values('comprimento')[0]
-    comprimento = int(comprimento1.get('comprimento')) + 1
+             dimensoes = Dimensao(float(post.largura), float(post.comprimento), float(post.prof_inicial),float(post.prof_final) , float(post.largura_calcada))
+             filtro = Filtro(dimensoes)
+             motor = Motor(dimensoes)
+             vinil = Vinil(post.espessura, post.fornecedor)
 
+             # DIMENSÕES #
+             post.prof_media = dimensoes.profundidade_media()
+             post.area_calcada = dimensoes.area_da_calcada()
+             post.perimetro = dimensoes.perimetro()
+             post.m2_facial = dimensoes.m2facial()
+             post.m2_parede = dimensoes.m2parede()
+             post.m2_total = dimensoes.m2total()
+             post.m3_total = dimensoes.m3total()
+             post.m3_real = dimensoes.m3real()
 
-    context = {
-        'comprimento': comprimento,
-    }
+             # KIT DE REVESTIMENTO #
+             post.vinil_m2 = dimensoes.m2total()
+             post.isomanta_m2 = dimensoes.m2facial()
+             post.perfil_fixo_m = dimensoes.perimetro()
+
+             # CONJUNTO FILTRANTE #
+             post.filtro = filtro.dimensionamento_filtro_grupo()['marca'].title() + ' ' + filtro.dimensionamento_filtro_grupo()['modelo']
+             post.motobomba = motor.dimensionamento_motobomba_grupo()['marca'].title() + ' - ' + motor.dimensionamento_motobomba_grupo()['modelo']
+             post.tampa_casa_maquinas = filtro.dimensionamento_tampa_casa_de_maquinas_grupo()['modelo']
+             post.sacos_areia = filtro.quantidade_de_areia_no_filtro()
+
+             # MÃO DE OBRA #
+             post.escavacao = dimensoes.m3total()
+             post.construcao = dimensoes.m2total()
+             post.contra_piso = dimensoes.area_da_calcada()
+             post.remocao_terra = dimensoes.m3total()
+             post.instalacao_vinil = dimensoes.m2total()
+
+             post.save()
+             return redirect('orcamento-id', pk=post.pk)
+
+    else:
+        form = DimensaoForm()
+
+        return render(request, 'index.html', {'form': form})
+
+def index2(request):
+    recebe_cliente = ClienteModel.objects.values()[0]
+    nome = recebe_cliente.get('nome')
+
+    recebe_dime = DimensaoModel.objects.values()[0]
+
+    comprimento = int(recebe_dime.get('comprimento'))
+    largura = int(recebe_dime.get('largura'))
+    prof_inicial = int(recebe_dime.get('prof_inicial'))
+    prof_final = int(recebe_dime.get('prof_final'))
+    largura_calcada = int(recebe_dime.get('largura_calcada'))
+
+    dimensoes = Dimensao(largura,comprimento,prof_inicial,prof_final,largura_calcada)
+
+    prof_media = dimensoes.profundidade_media()
+    area_calcada = dimensoes.area_da_calcada()
+    perimetro = dimensoes.perimetro()
+    m2_facial = dimensoes.m2facial()
+    m2_parede = dimensoes.m2parede()
+    m2_total = dimensoes.m2total()
+    m3_total = dimensoes.m3total()
+    m3_real  =dimensoes.m3real()
+
+    #DimensaoModel.objects.create(perimetro = perimetro, m2_facial = m2_facial).save()
+
+    context = {'nome': nome,
+               'comprimento': comprimento,
+               'largura': largura,
+               'prof_inicial': prof_inicial,
+               'prof_final': prof_final,
+               'largura_calcada': largura_calcada,
+               'prof_media': prof_media,
+               'area_calcada': area_calcada,
+               'perimetro': perimetro,
+               'm2_facial': m2_facial,
+               'm2_parede': m2_parede,
+               'm2_total': m2_total,
+               'm3_total': m3_total,
+               'm3_real': m3_real
+               }
 
     # Render the HTML template index.html with the data in the context variable
-    return render(request, 'index.html', context=context)
+    return render(request, 'index2.html', context=context)
 
 #-----------------------ORÇAMENTO------------------------------#
 
 class OrcamentoListView(generic.ListView):
     model = DimensaoModel
-    paginate_by = 10 #Exibe uma lista de no máximo 10 itens por vez
+    paginate_by = 30 #Exibe uma lista de no máximo 10 itens por vez
     context_object_name = 'lista_orcamento' #Nome do objeto
     template_name = 'front/orcamento_list.html' #Nome e caminho do template
 
@@ -32,6 +118,7 @@ class OrcamentoCreateView(generic.CreateView):
     fields = '__all__'
     context_object_name = 'create_orcamento'
     template_name = 'front/orcamento_create.html'
+    # ---------------------------------------------------------
 
 class OrcamentoDetailView(generic.DetailView):
     model = DimensaoModel
@@ -40,7 +127,9 @@ class OrcamentoDetailView(generic.DetailView):
 
 class OrcamentoUpdateView(generic.UpdateView):
     model =  DimensaoModel
-    fields = ["status",
+    fields = ["cliente",
+              "usuario",
+              "status",
               "comprimento",
               "largura",
               "prof_inicial",
@@ -65,7 +154,10 @@ class OrcamentoUpdateView(generic.UpdateView):
               "perfil_fixo_m",
               "escavacao",
               "construcao",
+              "contra_piso",
+              "remocao_terra",
               "instalacao_vinil",
+              "data",
               ]
     context_object_name = 'update_orcamento'
     template_name = 'front/orcamento_update.html'

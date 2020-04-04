@@ -1,0 +1,74 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<br>
+<br>
+  <h1>Pool Budget</h1>
+  <h3>{{ nome }}</h3>
+    <table class="table">
+      <thead class="thead-light">
+      <tr>
+      <th scope="col">Data de Criação</th>
+      <th scope="col">Vendedor</th>
+      <th scope="col">Status</th>
+      <th scope="col">Fornecedor</th>
+      <th scope="col">Espessura</th>
+      </tr>
+      </thead>
+      <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      </tr>
+    </table>
+
+
+  <h4 align="center"><p><strong>Preço da Piscina </strong> </p></h4>
+      <p align="center"><strong>R$ 18.000,00 </strong> </p>
+
+
+  <h4><span class="badge badge-secondary">DIMENSÕES</span></h4>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>Comprimento:</b> {{ comprimento }} <i>(metro)</i></li>
+          <li class="list-group-item"><b>Largura:</b> {{ largura }} <i>(metro)</i></li>
+          <li class="list-group-item"><b>Prof. Inicial:</b> {{ prof_inicial }} <i>(metro)</i></li>
+          <li class="list-group-item"><b>Prof. Final:</b>{{ prof_final }} <i>(metro)</i></li>
+          <li class="list-group-item"><b>Largura da Calçada:</b> {{ largura_calcada }} <i>(metro)</i></li>
+          {{object.media}}
+          <li class="list-group-item"><b>Profundidade Média:</b> {{ prof_media }} <i>(metro)</i></li>
+          <li class="list-group-item"><b>Área de Calçada:</b> {{ area_calcada }} <i>(m²)</i></li>
+          <li class="list-group-item"><b>Perímetro:</b> {{ perimetro }} <i>(metro linear)</i></li>
+          <li class="list-group-item"><b>M² Facial:</b> {{ m2_facial }} </li>
+          <li class="list-group-item"><b>M² de parede:</b> {{ m2_parede }} </li>
+          <li class="list-group-item"><b>M² Total:</b> {{ m2_total }} </li>
+          <li class="list-group-item"><b>M³ Total:</b> {{ m3_total }} </li>
+          <li class="list-group-item"><b>M³ Real:</b> {{ m3_real }} </li>
+        </ul>
+
+  <h4><span class="badge badge-secondary">KIT DE REVESTIMENTO</span></h4>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>Vinil:</b>  <i>(m²)</i></li>
+          <li class="list-group-item"><b>Isomanta:</b>  <i>(m²)</i></li>
+          <li class="list-group-item"><b>Perfil Fixo:</b>  <i>(metro linear)</i></li>
+        </ul>
+
+  <h4><span class="badge badge-secondary">CONJUNTO FILTRANTE</span></h4>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>Filtro:</b> </li>
+          <li class="list-group-item"><b>Motobomba:</b> </li>
+          <li class="list-group-item"><b>Tampa da Casa de Máquinas:</b> </li>
+          <li class="list-group-item"><b>Sacos de areia:</b> </li>
+        </ul>
+
+  <h4><span class="badge badge-secondary">MÃO DE OBRA</span></h4>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>Escavação:</b>  <i>(m³ de terra)</i></li>
+          <li class="list-group-item"><b>Construção:</b>  <i>(m² de paredes)</i></li>
+          <li class="list-group-item"><b>Filtro:</b> </li>
+          <li class="list-group-item"><b>Motobomba:</b> </li>
+          <li class="list-group-item"><b>Instalação de Vinil:</b>  <i>(m²)</i></li>
+        </ul>
+
+{% endblock %}

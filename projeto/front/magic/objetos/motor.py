@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-
 from .filtro import Filtro
-from projeto.front.magic.dbs.database import Database
+from .dbs.database import Database
 
 class Motor():
     def __init__(self, dimensao):

@@ -4,11 +4,10 @@
 <br>
 <br>
   <h1>Pool Budget</h1>
-
-  <ul>
-    <li><strong>Comprimento:</strong> {{ comprimento }}</li>
-    <li><strong>Espessura:</strong> {{ espessura }}</li>
-    <li><strong>Fornecedor:</strong> {{ fornecedor }}</li>
-  </ul>
+  <h2>New post</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
 
 {% endblock %}

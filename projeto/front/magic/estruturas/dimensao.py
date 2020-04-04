@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from projeto.front.magic.dbs.database import Database
 
 # Estrutura de Dados de Dimensão
 class Dimensao:

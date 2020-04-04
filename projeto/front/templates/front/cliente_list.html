@@ -9,16 +9,19 @@
 
     <table class="table">
       <thead class="thead-light">
-      <tr>
-      <th scope="col">Cliente</th>
-      <th scope="col">Sobrenome</th>
-      </tr>
+        <tr>
+          <th scope="col">Cliente</th>
+          <th scope="col">Sobrenome</th>
+          <th></th>
+
+        </tr>
       </thead>
       {% for cliente in lista_cliente %}
-      <tr>
-      <td><a href="{{ cliente.get_absolute_url }}">{{ cliente.nome }}</a>  </td>
-      <td>{{ cliente.sobrenome }}</td>
-      </tr>
+        <tr>
+          <td><a href="{{ cliente.get_absolute_url }}">{{ cliente.nome }}</a>  </td>
+          <td>{{ cliente.sobrenome }}</td>
+          <td><a href="{% url 'cliente_delete' cliente.pk %}">Excuir</a></td>
+        </tr>
       {% endfor %}
     </table>
 

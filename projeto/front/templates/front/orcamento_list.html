@@ -13,6 +13,7 @@
       <th scope="col">Cliente</th>
       <th scope="col">Vendedor</th>
       <th scope="col">Status</th>
+      <th></th>
       </tr>
       </thead>
       {% for orcamento in lista_orcamento %}
@@ -20,6 +21,7 @@
       <td><a href="{{ orcamento.get_absolute_url }}">{{ orcamento.cliente }}</a></td>
       <td>{{ orcamento.usuario }}</td>
       <td>{{ orcamento.status }}</td>
+      <td><a href="{% url 'orcamento_delete' orcamento.pk %}">Excuir</a></td>
       </tr>
       {% endfor %}
     </table>

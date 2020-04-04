@@ -1,7 +1,6 @@
 
-from projeto.front.magic.dbs.database import Database
+from .dbs.database import Database
 from .vinil import Vinil
-from projeto.front.magic.estruturas.dimensao import Dimensao
 from .filtro import Filtro
 import locale
 
