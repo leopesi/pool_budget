@@ -61,50 +61,6 @@ def index(request):
 
         return render(request, 'index.html', {'form': form})
 
-def index2(request):
-    recebe_cliente = ClienteModel.objects.values()[0]
-    nome = recebe_cliente.get('nome')
-
-    recebe_dime = DimensaoModel.objects.values()[0]
-
-    comprimento = int(recebe_dime.get('comprimento'))
-    largura = int(recebe_dime.get('largura'))
-    prof_inicial = int(recebe_dime.get('prof_inicial'))
-    prof_final = int(recebe_dime.get('prof_final'))
-    largura_calcada = int(recebe_dime.get('largura_calcada'))
-
-    dimensoes = Dimensao(largura,comprimento,prof_inicial,prof_final,largura_calcada)
-
-    prof_media = dimensoes.profundidade_media()
-    area_calcada = dimensoes.area_da_calcada()
-    perimetro = dimensoes.perimetro()
-    m2_facial = dimensoes.m2facial()
-    m2_parede = dimensoes.m2parede()
-    m2_total = dimensoes.m2total()
-    m3_total = dimensoes.m3total()
-    m3_real  =dimensoes.m3real()
-
-    #DimensaoModel.objects.create(perimetro = perimetro, m2_facial = m2_facial).save()
-
-    context = {'nome': nome,
-               'comprimento': comprimento,
-               'largura': largura,
-               'prof_inicial': prof_inicial,
-               'prof_final': prof_final,
-               'largura_calcada': largura_calcada,
-               'prof_media': prof_media,
-               'area_calcada': area_calcada,
-               'perimetro': perimetro,
-               'm2_facial': m2_facial,
-               'm2_parede': m2_parede,
-               'm2_total': m2_total,
-               'm3_total': m3_total,
-               'm3_real': m3_real
-               }
-
-    # Render the HTML template index.html with the data in the context variable
-    return render(request, 'index2.html', context=context)
-
 #-----------------------ORÇAMENTO------------------------------#
 
 class OrcamentoListView(generic.ListView):
