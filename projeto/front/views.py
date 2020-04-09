@@ -69,11 +69,6 @@ class OrcamentoListView(generic.ListView):
     context_object_name = 'lista_orcamento' #Nome do objeto
     template_name = 'front/orcamento_list.html' #Nome e caminho do template
 
-class OrcamentoCreateView(generic.CreateView):
-    model = DimensaoModel
-    fields = '__all__'
-    context_object_name = 'create_orcamento'
-    template_name = 'front/orcamento_create.html'
     # ---------------------------------------------------------
 
 class OrcamentoDetailView(generic.DetailView):
