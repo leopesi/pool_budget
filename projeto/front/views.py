@@ -63,7 +63,10 @@ def index(request):
         return render(request, 'index.html', {'form': form})
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Debug_toolbar
 class DimensaoBulk(generic.View):
     def get(self, request):
         dimensoes = ['profundidade_media','area_calcada','perimetro','m2_facial','m2_parede','m2_total','m3_total','m3_real']
@@ -82,7 +85,12 @@ class DimensaoBulk(generic.View):
 
 
 
+<<<<<<< HEAD
 >>>>>>> debug_toolbar
+=======
+=======
+>>>>>>> c752187d4cf43c60875a1901ac3af277c4228ea9
+>>>>>>> Debug_toolbar
 #-----------------------ORÇAMENTO------------------------------#
 
 class OrcamentoListView(generic.ListView):
@@ -189,8 +197,16 @@ class ClienteDeleteView(generic.DeleteView):
     context_object_name = 'delete_cliente'
     template_name = 'front/cliente_confirm_delete.html'
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
     def get_success_url(self): #Permite personalizar a visualização
         return reverse_lazy('cliente')
 >>>>>>> debug_toolbar
+=======
+
+    def get_success_url(self): #Permite personalizar a visualização
+        return reverse_lazy('cliente')
+=======
+>>>>>>> c752187d4cf43c60875a1901ac3af277c4228ea9
+>>>>>>> Debug_toolbar
