@@ -1,10 +1,14 @@
 {% extends "base_generic.html" %}
-
+{% load filters %}
 {% block content %}
 <br>
 <br>
+<h1>{{ object.cliente.nome_completo|title }}</h1>
+<li>{{ object.cliente.cidade }}</li>
+<li>{{ object.cliente.rua|title }}, {{ object.cliente.numero_casa }}</li>
+<li>{{ object.cliente.telefone }}</li>
+<li>{{ object.cliente.email }}</li>
 
-<h1><a href="{{ object.cliente.get_absolute_url }}"> {{ object.cliente }} </a> </h1>
     <table class="table">
       <thead class="thead-light">
       <tr>
@@ -17,10 +21,10 @@
       </thead>
       <tr>
       <td>{{ object.data }}</td>
-      <td>{{ object.usuario }}</td>
+      <td>{{ object.usuario|title }}</td>
       <td>{{ object.status }}</td>
-      <td>{{ object.fornecedor }}</td>
-      <td>{{ object.espessura }}</td>
+      <td>{{ object.fornecedor|title }}</td>
+      <td>{{ object.espessura }} mm</td>
       </tr>
     </table>
 {% if lista_orcamento %}
@@ -36,21 +40,21 @@
           <li class="list-group-item"><b>Prof. Inicial:</b> {{ object.prof_inicial }} <i>(metro)</i></li>
           <li class="list-group-item"><b>Prof. Final:</b> {{ object.prof_final }} <i>(metro)</i></li>
           <li class="list-group-item"><b>Largura da Calçada:</b> {{ object.largura_calcada }} <i>(metro)</i></li>
-          {{object.media}}
+
           <li class="list-group-item"><b>Profundidade Média:</b> {{ object.profundidade_media }} <i>(metro)</i></li>
-          <li class="list-group-item"><b>Área de Calçada:</b> {{ object.area_calcada }} <i>(m²)</i></li>
-          <li class="list-group-item"><b>Perímetro:</b> {{ object.perimetro }} <i>(metro linear)</i></li>
-          <li class="list-group-item"><b>M² Facial:</b> {{ object.m2_facial }}</li>
-          <li class="list-group-item"><b>M² de parede:</b> {{ object.m2_parede }}</li>
-          <li class="list-group-item"><b>M² Total:</b> {{ object.m2_total }}</li>
-          <li class="list-group-item"><b>M³ Total:</b> {{ object.m3_total }}</li>
-          <li class="list-group-item"><b>M³ Real:</b> {{ object.m3_real }}</li>
+          <li class="list-group-item"><b>Área de Calçada:</b> {{ object.area_calcada|arredonda:1 }} <i>(m²)</i></li>
+          <li class="list-group-item"><b>Perímetro:</b> {{ object.perimetro|arredonda:1 }} <i>(metro linear)</i></li>
+          <li class="list-group-item"><b>M² Facial:</b> {{ object.m2_facial|arredonda:1 }}</li>
+          <li class="list-group-item"><b>M² de parede:</b> {{ object.m2_parede|arredonda:1 }}</li>
+          <li class="list-group-item"><b>M² Total:</b> {{ object.m2_total|arredonda:1 }}</li>
+          <li class="list-group-item"><b>M³ Total:</b> {{ object.m3_total|arredonda:1 }}</li>
+          <li class="list-group-item"><b>M³ Real:</b> {{ object.m3_real|arredonda:1 }}</li>
         </ul>
   <h4><span class="badge badge-secondary">KIT DE REVESTIMENTO</span></h4>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><b>Vinil:</b> {{ object.m2_total}} <i>(m²)</i></li>
-          <li class="list-group-item"><b>Isomanta:</b> {{ object.m2_facial }} <i>(m²)</i></li>
-          <li class="list-group-item"><b>Perfil Fixo:</b> {{ object.perimetro }} <i>(metro linear)</i></li>
+          <li class="list-group-item"><b>Vinil:</b> {{ object.m2_total|arredonda:1}} <i>(m²)</i></li>
+          <li class="list-group-item"><b>Isomanta:</b> {{ object.m2_facial|arredonda:1 }} <i>(m²)</i></li>
+          <li class="list-group-item"><b>Perfil Fixo:</b> {{ object.perimetro|arredonda:1 }} <i>(metro linear)</i></li>
         </ul>
   <h4><span class="badge badge-secondary">CONJUNTO FILTRANTE</span></h4>
         <ul class="list-group list-group-flush">
@@ -61,11 +65,11 @@
         </ul>
   <h4><span class="badge badge-secondary">MÃO DE OBRA</span></h4>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><b>Escavação:</b> {{ object.m3_total }} <i>(m³ de terra)</i></li>
-          <li class="list-group-item"><b>Construção:</b> {{ object.m2_parede }} <i>(m² de paredes)</i></li>
-          <li class="list-group-item"><b>Contra Piso:</b> {{ object.area_calcada }} <i>(m² )</i></li>
-          <li class="list-group-item"><b>Remoção de Terra:</b> {{ object.m3_total }} <i>(m³)</i></li>
-          <li class="list-group-item"><b>Instalação de Vinil:</b> {{ object.m2_total}} <i>(m²)</i></li>
+          <li class="list-group-item"><b>Escavação:</b> {{ object.m3_total|arredonda:1 }} <i>(m³ de terra)</i></li>
+          <li class="list-group-item"><b>Construção:</b> {{ object.m2_parede|arredonda:1 }} <i>(m² de paredes)</i></li>
+          <li class="list-group-item"><b>Contra Piso:</b> {{ object.area_calcada|arredonda:1 }} <i>(m² )</i></li>
+          <li class="list-group-item"><b>Remoção de Terra:</b> {{ object.m3_total|arredonda:1 }} <i>(m³)</i></li>
+          <li class="list-group-item"><b>Instalação de Vinil:</b> {{ object.m2_total|arredonda:1}} <i>(m²)</i></li>
         </ul>
 
 <p><strong><a href="{% url 'orcamento_update' object.pk %}">Alterar</a> | <a href="{% url 'orcamento_delete' object.pk %}">Excuir</a></strong></p>

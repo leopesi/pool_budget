@@ -1,4 +1,4 @@
-
+from django.http import HttpResponse
 from django.views import generic
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -55,12 +55,34 @@ def index(request):
 
              post.save()
              return redirect('orcamento-id', pk=post.pk)
+         else:
+             return render(request, 'index.html', {'form': form})
 
     else:
         form = DimensaoForm()
-
         return render(request, 'index.html', {'form': form})
 
+<<<<<<< HEAD
+=======
+class DimensaoBulk(generic.View):
+    def get(self, request):
+        dimensoes = ['profundidade_media','area_calcada','perimetro','m2_facial','m2_parede','m2_total','m3_total','m3_real']
+        list_dimensoes = []
+        model = DimensaoModel
+
+        for item in model:
+            valor = 10
+            item = valor
+            list_dimensoes.append(item)
+
+            DimensaoModel.objects.bulk_create(list_dimensoes)
+
+            return HttpResponse('Funcionou')
+
+
+
+
+>>>>>>> debug_toolbar
 #-----------------------ORÇAMENTO------------------------------#
 
 class OrcamentoListView(generic.ListView):
@@ -76,9 +98,17 @@ class OrcamentoDetailView(generic.DetailView):
     context_object_name = 'lista_orcamento'
     template_name = 'front/orcamento_detail.html'
 
-class OrcamentoUpdateView(generic.UpdateView):
+class OrcamentoUpdateView(generic.UpdateView): # todo: Testar o fields com '__all__'
+    '''
+    ------------DEBUG----------------
+    import pdb; pdb.set_trace()
+    l (mostra o ponto de verificação)
+    n (next)
+    c (continue)
+    ---------------------------------
+    '''
     model =  DimensaoModel
-    fields = ["cliente",
+    fields = [
               "usuario",
               "status",
               "comprimento",
@@ -112,6 +142,13 @@ class OrcamentoUpdateView(generic.UpdateView):
               ]
     context_object_name = 'update_orcamento'
     template_name = 'front/orcamento_update.html'
+
+    def post(self, *args, **kwargs):
+        formulario = self.get_form()
+        print('**********')
+        print(formulario.errors)
+        print('**********')
+        return super().post(*args, **kwargs)
 
 class OrcamentoDeleteView(generic.DeleteView):
     model = DimensaoModel
@@ -148,6 +185,12 @@ class ClienteUpdateView(generic.UpdateView):
 class ClienteDeleteView(generic.DeleteView):
     model = ClienteModel
     fields = '__all__'
-    success_url = reverse_lazy('cliente')
+    #success_url = reverse_lazy('cliente')
     context_object_name = 'delete_cliente'
     template_name = 'front/cliente_confirm_delete.html'
+<<<<<<< HEAD
+=======
+
+    def get_success_url(self): #Permite personalizar a visualização
+        return reverse_lazy('cliente')
+>>>>>>> debug_toolbar

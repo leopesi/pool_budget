@@ -3,15 +3,16 @@
 {% block content %}
 <br>
 <br>
-  <h1>{{ object.nome }}</h1>
+  <h1>{{ object.nome_completo|title }}</h1>
 {% if lista_cliente %}
 
   <h4><strong>INFORMAÇÕES CADASTRAIS:</strong></h4>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><b>Nome:</b> {{ object.nome }} </li>
-          <li class="list-group-item"><b>Sobrenome:</b> {{ object.sobrenome }}</li>
-          <li class="list-group-item"><b>Cidade:</b> {{ object.cidade }}</li>
+          <li class="list-group-item"><b>Nome:</b> {{ object.nome|title }} </li>
+          <li class="list-group-item"><b>Sobrenome:</b> {{ object.sobrenome|title }}</li>
           <li class="list-group-item"><b>Estado:</b> {{ object.estado }}</li>
+          <li class="list-group-item"><b>Cidade:</b> {{ object.cidade|title }}</li>
+          <li class="list-group-item"><b>Bairro:</b> {{ object.bairro|title }}</li>
           <li class="list-group-item"><b>Rua:</b> {{ object.rua }}</li>
           <li class="list-group-item"><b>N°:</b> {{ object.numero_casa }}</li>
           <li class="list-group-item"><b>Cep:</b> {{ object.cep }}</li>

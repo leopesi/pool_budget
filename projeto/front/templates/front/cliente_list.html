@@ -10,18 +10,22 @@
     <table class="table">
       <thead class="thead-light">
         <tr>
-          <th scope="col">Cliente</th>
-          <th scope="col">Sobrenome</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Bairro/Condomínio</th>
+          <th scope="col">Rua</th>
           <th></th>
-
         </tr>
       </thead>
       {% for cliente in lista_cliente %}
         <tr>
-          <td><a href="{{ cliente.get_absolute_url }}">{{ cliente.nome }}</a>  </td>
-          <td>{{ cliente.sobrenome }}</td>
-          <td><a href="{% url 'cliente_delete' cliente.pk %}">Excuir</a></td>
+          <td><a href="{{ cliente.get_absolute_url }}">{{ cliente.nome_completo|title }} </a>  </td>
+          <td>{{ cliente.cidade|title }}</td>
+          <td>{{ cliente.bairro|title }}</td>
+          <td>{{ cliente.rua|title }}, {{ cliente.numero_casa }}</td>
+          <td><a href="{% url 'cliente_delete' cliente.pk %}"><font color="FireBrick">Excuir</font></a></td>
         </tr>
+
       {% endfor %}
     </table>
 
@@ -30,7 +34,5 @@
 {% else %}
   <p>There are no authors available.</p>'
 {% endif %}
-        
-        
         
 {% endblock %}

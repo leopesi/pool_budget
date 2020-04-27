@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load my_tags %}
 <html lang="pt-br">
 <head>
   {% block title %}<title>Local Library</title>{% endblock %}
@@ -49,9 +50,8 @@
 <hr>
     <footer class="bg-4 text-center">
         <p align="left">  Progresso do site <progress value="70" max="100">70 %</progress></p>
-        <p> Criado por Leonardo Pereira <a href="https://github.com/leopesi">GitHub</a></p>
+        <p> Desenvolvido com Django 3.0.3 por Leonardo Pereira - <a href="https://github.com/leopesi">GitHub</a></p>
+        <p>{% current_time "%Y-%m-%d %I:%M %p" as the_time %} Hora do Servidor {{ the_time }}</p>
     </footer>
-
-
 </body>
 </html>

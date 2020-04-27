@@ -1,7 +1,6 @@
 from django.urls import path, include
 from . import views
 
-
 urlpatterns = [
     path('', views.index, name='index'),
     path('orcamento', views.OrcamentoListView.as_view(), name='orcamento'),
@@ -15,5 +14,6 @@ urlpatterns = [
     path('cliente/<int:pk>', views.ClienteDetailView.as_view(), name='cliente-id'),
     path('cliente/<int:pk>/update/', views.ClienteUpdateView.as_view(), name='cliente_update'),
     path('cliente/<int:pk>/delete/', views.ClienteDeleteView.as_view(), name='cliente_delete'),
-    ]
+    path('dimensao_bulk', views.DimensaoBulk.as_view(), name='dimensao_bulk'),
+]
 

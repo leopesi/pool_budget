@@ -10,18 +10,20 @@
     <table class="table">
       <thead class="thead-light">
       <tr>
-      <th scope="col">Cliente</th>
-      <th scope="col">Vendedor</th>
-      <th scope="col">Status</th>
-      <th></th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Vendedor</th>
+        <th scope="col">Status</th>
+        <th scope="col">Data</th>
+        <th></th>
       </tr>
       </thead>
       {% for orcamento in lista_orcamento %}
       <tr>
-      <td><a href="{{ orcamento.get_absolute_url }}">{{ orcamento.cliente }}</a></td>
-      <td>{{ orcamento.usuario }}</td>
-      <td>{{ orcamento.status }}</td>
-      <td><a href="{% url 'orcamento_delete' orcamento.pk %}">Excuir</a></td>
+        <td><a href="{{ orcamento.get_absolute_url }}">{{ orcamento.cliente.nome_completo }}</a></td>
+        <td>{{ orcamento.usuario }}</td>
+        <td>{{ orcamento.status }}</td>
+        <td>{{ orcamento.data }}</td>
+        <td><a href="{% url 'orcamento_delete' orcamento.pk %}"><font color="FireBrick">Excuir</font></a></td>
       </tr>
       {% endfor %}
     </table>

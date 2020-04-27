@@ -1,13 +1,20 @@
 {% extends "base_generic.html" %}
-
+{% load bootstrap%}
 {% block content %}
 <br>
 <br>
   <h1>Pool Budget</h1>
   <h2>New post</h2>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+    <form method="post">{% csrf_token %}
+            {{ form.cliente | bootstrap_horizontal }}
+            {{ form.espessura | bootstrap_horizontal }}
+            {{ form.fornecedor | bootstrap_horizontal }}
+            {{ form.comprimento | bootstrap_horizontal }}
+            {{ form.largura | bootstrap_horizontal }}
+            {{ form.prof_inicial | bootstrap_horizontal }}
+            {{ form.prof_final | bootstrap_horizontal }}
+            {{ form.largura_calcada | bootstrap_horizontal }}
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 {% endblock %}

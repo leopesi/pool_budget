@@ -1,11 +1,14 @@
 {% extends "base_generic.html" %}
-
+{% load filters %}
 {% block content %}
 <br>
 <br>
-
-<h1><a href="{{ object.cliente.get_absolute_url }}"> {{ object.cliente }} </a> </h1>
 {{ form.source }}
+<h1>{{ object.cliente }}</h1>
+<li>{{ object.cliente.cidade }}</li>
+<li>{{ object.cliente.rua }}, {{ object.cliente.numero_casa }}</li>
+<li>{{ object.cliente.telefone }}</li>
+<li>{{ object.cliente.email }}</li>
 <form action="" method="post">
     <table class="table">
       <thead class="thead-light">
@@ -18,8 +21,8 @@
       </tr>
       </thead>
       <tr>
-      <td>{{ object.data }}</td>
-      <td>{{ object.usuario }}</td>
+      <td>{{ form.data }}</td>
+      <td>{{ form.usuario }}</td>
       <td>{{ form.status }}</td>
       <td>{{ form.fornecedor }}</td>
       <td>{{ form.espessura }}</td>
@@ -76,8 +79,12 @@
 <input type="submit" value="Submit">
 </form>
 
+
+
 {% else %}
   <p>Objeto não encontrado.</p>'
 {% endif %}
+
+
 
 {% endblock %}
