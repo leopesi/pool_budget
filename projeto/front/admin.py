@@ -4,8 +4,48 @@ from .models import ClienteModel, DimensaoModel
 # Register your models here.
 @admin.register(ClienteModel)
 class ClienteAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'sobrenome', 'cidade', 'estado', 'rua', 'numero_casa', 'cep', 'telefone', 'email')
+    list_display = ('nome_completo', 'cidade',  'rua', 'numero_casa', 'telefone', 'email')
+    list_filter = ('nome', 'cidade', 'bairro', )
 
 @admin.register(DimensaoModel)
 class DimensaoAdmin(admin.ModelAdmin):
-    list_display = ('comprimento', 'largura', 'prof_inicial','prof_final', 'largura_calcada')
+    fieldsets = (
+        ('Cabeçalho',{
+            'fields': ('cliente','status','data')
+          }),
+        ('Formulário', {
+            'fields': ('espessura', 'fornecedor', 'comprimento', 'largura', 'prof_inicial','prof_final', 'largura_calcada')
+        }),
+        ('Dimensões Calculadas', {
+            'classes': ('collapse',),
+            'fields': (
+            'profundidade_media', 'area_calcada', 'perimetro', 'm2_facial', 'm2_parede', 'm2_total', 'm3_total',
+            'm3_real',)
+        }),
+        ('Conjunto Filtrante', {
+            'classes': ('collapse',),
+            'fields': (
+            'filtro', 'motobomba', 'tampa_casa_maquinas', 'sacos_areia')
+        }),
+        ('Revestimento', {
+            'classes': ('collapse',),
+            'fields': (
+                'vinil_m2', 'isomanta_m2', 'perfil_fixo_m')
+        }),
+        ('Mão de Obra', {
+            'classes': ('collapse',),
+            'fields': (
+                'escavacao', 'construcao', 'contra_piso', 'remocao_terra', 'instalacao_vinil')
+        }),
+    )
+
+    list_display = ('cliente', 'status', 'data', 'medidas')
+    def medidas(self, obj):
+        if obj.comprimento and obj.largura and obj.profundidade_media:
+            return str(round(float(obj.comprimento),1)) + ' x ' + str(round(float(obj.largura),1)) + ' x ' + str(round(float(obj.profundidade_media),1))
+        else:
+            return 'Sem medidas'
+    medidas.short_description = 'Medidas'
+
+    list_filter = ('usuario', 'status', 'cliente', 'cliente__bairro','data',)
+    search_fields = ('cliente',)

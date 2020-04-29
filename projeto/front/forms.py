@@ -8,3 +8,7 @@ class DimensaoForm(ModelForm):
             model = DimensaoModel
             fields = ('cliente', 'comprimento', 'largura', 'prof_inicial', 'prof_final', 'largura_calcada', 'espessura', 'fornecedor')
 
+class OrcamentoUpdateForm(ModelForm):
+    class Meta:
+        model = DimensaoModel
+        exclude = ('cliente',)

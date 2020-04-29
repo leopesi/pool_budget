@@ -10,7 +10,7 @@ from .magic.estruturas.dimensao import Dimensao
 from .magic.objetos.filtro import Filtro
 from .magic.objetos.motor import Motor
 from .magic.objetos.vinil import Vinil
-from .forms import DimensaoForm
+from .forms import DimensaoForm, OrcamentoUpdateForm
 
 def index(request):
     if request.method == "POST":
@@ -62,11 +62,6 @@ def index(request):
         form = DimensaoForm()
         return render(request, 'index.html', {'form': form})
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> Debug_toolbar
 class DimensaoBulk(generic.View):
     def get(self, request):
         dimensoes = ['profundidade_media','area_calcada','perimetro','m2_facial','m2_parede','m2_total','m3_total','m3_real']
@@ -82,15 +77,6 @@ class DimensaoBulk(generic.View):
 
             return HttpResponse('Funcionou')
 
-
-
-
-<<<<<<< HEAD
->>>>>>> debug_toolbar
-=======
-=======
->>>>>>> c752187d4cf43c60875a1901ac3af277c4228ea9
->>>>>>> Debug_toolbar
 #-----------------------ORÇAMENTO------------------------------#
 
 class OrcamentoListView(generic.ListView):
@@ -99,12 +85,20 @@ class OrcamentoListView(generic.ListView):
     context_object_name = 'lista_orcamento' #Nome do objeto
     template_name = 'front/orcamento_list.html' #Nome e caminho do template
 
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        return DimensaoModel.objects.select_related('cliente').get(id=pk)
+
     # ---------------------------------------------------------
 
 class OrcamentoDetailView(generic.DetailView):
     model = DimensaoModel
     context_object_name = 'lista_orcamento'
     template_name = 'front/orcamento_detail.html'
+
+    def get_object(self, queryset=None): # Evita o a consulta no BD das foreign-key 'cliente' e 'usuario'
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        return DimensaoModel.objects.select_related('cliente', 'usuario').get(id=pk)
 
 class OrcamentoUpdateView(generic.UpdateView): # todo: Testar o fields com '__all__'
     '''
@@ -116,38 +110,7 @@ class OrcamentoUpdateView(generic.UpdateView): # todo: Testar o fields com '__al
     ---------------------------------
     '''
     model =  DimensaoModel
-    fields = [
-              "usuario",
-              "status",
-              "comprimento",
-              "largura",
-              "prof_inicial",
-              "prof_final",
-              "largura_calcada",
-              "espessura",
-              "fornecedor",
-              "profundidade_media",
-              "area_calcada",
-              "perimetro",
-              "m2_facial",
-              "m2_parede",
-              "m2_total",
-              "m3_total",
-              "m3_real",
-              "filtro",
-              "motobomba",
-              "tampa_casa_maquinas",
-              "sacos_areia",
-              "vinil_m2",
-              "isomanta_m2",
-              "perfil_fixo_m",
-              "escavacao",
-              "construcao",
-              "contra_piso",
-              "remocao_terra",
-              "instalacao_vinil",
-              "data",
-              ]
+    form_class = OrcamentoUpdateForm
     context_object_name = 'update_orcamento'
     template_name = 'front/orcamento_update.html'
 
@@ -196,17 +159,6 @@ class ClienteDeleteView(generic.DeleteView):
     #success_url = reverse_lazy('cliente')
     context_object_name = 'delete_cliente'
     template_name = 'front/cliente_confirm_delete.html'
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
     def get_success_url(self): #Permite personalizar a visualização
         return reverse_lazy('cliente')
->>>>>>> debug_toolbar
-=======
-
-    def get_success_url(self): #Permite personalizar a visualização
-        return reverse_lazy('cliente')
-=======
->>>>>>> c752187d4cf43c60875a1901ac3af277c4228ea9
->>>>>>> Debug_toolbar

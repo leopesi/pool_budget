@@ -4,7 +4,6 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('orcamento', views.OrcamentoListView.as_view(), name='orcamento'),
-    path('orcamento/create/', views.OrcamentoCreateView.as_view(), name='orcamento_create'),
     path('orcamento/<int:pk>', views.OrcamentoDetailView.as_view(), name='orcamento-id'),
     path('orcamento/<int:pk>/update/', views.OrcamentoUpdateView.as_view(), name='orcamento_update'),
     path('orcamento/<int:pk>/delete/', views.OrcamentoDeleteView.as_view(), name='orcamento_delete'),

@@ -39,8 +39,6 @@ class DimensaoModel(models.Model):
     cliente = models.ForeignKey(ClienteModel, on_delete=models.SET_NULL, null=True)
     usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
-
-
     """INPUT da piscina."""
     comprimento = models.CharField(max_length=3, null=False, blank=False, help_text='Ex. 8.00', default=0)
     largura = models.CharField(max_length=3, null=False, blank=False, help_text='Ex. 4.00', default=0)
