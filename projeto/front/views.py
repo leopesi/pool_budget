@@ -64,18 +64,16 @@ def index(request):
 
 class DimensaoBulk(generic.View):
     def get(self, request):
-        dimensoes = ['profundidade_media','area_calcada','perimetro','m2_facial','m2_parede','m2_total','m3_total','m3_real']
-        list_dimensoes = []
-        model = DimensaoModel
+        produtos = ['Banana', 'Maca', 'Limao', 'Laranja', 'Pera', 'Melancia']
+        list_produtos = []
 
-        for item in model:
-            valor = 10
-            item = valor
-            list_dimensoes.append(item)
+        for produto in produtos:
+            p = DimensaoModel(produto=produto, preco=10)
+            list_produtos.append(p)
 
-            DimensaoModel.objects.bulk_create(list_dimensoes)
+        DimensaoModel.objects.bulk_create(list_produtos)
 
-            return HttpResponse('Funcionou')
+        return HttpResponse('Funcionou')
 
 #-----------------------ORÇAMENTO------------------------------#
 

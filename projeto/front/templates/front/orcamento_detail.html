@@ -32,7 +32,6 @@
   <h4 align="center"><p><strong>Preço da Piscina </strong> </p></h4>
       <p align="center"><strong>R$ 18.000,00 </strong> </p>
 
-
   <h4><span class="badge badge-secondary">DIMENSÕES</span></h4>
         <ul class="list-group list-group-flush">
           <li class="list-group-item"><b>Comprimento:</b> {{ object.comprimento}} <i>(metro)</i></li>
@@ -40,7 +39,7 @@
           <li class="list-group-item"><b>Prof. Inicial:</b> {{ object.prof_inicial }} <i>(metro)</i></li>
           <li class="list-group-item"><b>Prof. Final:</b> {{ object.prof_final }} <i>(metro)</i></li>
           <li class="list-group-item"><b>Largura da Calçada:</b> {{ object.largura_calcada }} <i>(metro)</i></li>
-
+          {{ object.prof_media }}
           <li class="list-group-item"><b>Profundidade Média:</b> {{ object.profundidade_media }} <i>(metro)</i></li>
           <li class="list-group-item"><b>Área de Calçada:</b> {{ object.area_calcada|arredonda:1 }} <i>(m²)</i></li>
           <li class="list-group-item"><b>Perímetro:</b> {{ object.perimetro|arredonda:1 }} <i>(metro linear)</i></li>

@@ -9,6 +9,7 @@ class ClienteAdmin(admin.ModelAdmin):
 
 @admin.register(DimensaoModel)
 class DimensaoAdmin(admin.ModelAdmin):
+    ''' readonly_fields = ('data','cliente')
     fieldsets = (
         ('Cabeçalho',{
             'fields': ('cliente','status','data')
@@ -40,6 +41,7 @@ class DimensaoAdmin(admin.ModelAdmin):
     )
 
     list_display = ('cliente', 'status', 'data', 'medidas')
+
     def medidas(self, obj):
         if obj.comprimento and obj.largura and obj.profundidade_media:
             return str(round(float(obj.comprimento),1)) + ' x ' + str(round(float(obj.largura),1)) + ' x ' + str(round(float(obj.profundidade_media),1))
@@ -49,3 +51,7 @@ class DimensaoAdmin(admin.ModelAdmin):
 
     list_filter = ('usuario', 'status', 'cliente', 'cliente__bairro','data',)
     search_fields = ('cliente',)
+'''
+admin.site.site_header = "Painel de Controle"
+admin.site.index_title = "Configurações"
+admin.site.site_title = " "

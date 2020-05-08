@@ -2,31 +2,71 @@
 {% load my_tags %}
 <html lang="pt-br">
 <head>
-  {% block title %}<title>Local Library</title>{% endblock %}
+  {% block title %}<title>Pool Budget</title>{% endblock %}
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  #<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'js/scripts.js' %}">
+    <script>
 
+    //JavaScrip
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    function letras(i) {
+
+      document.getElementsByTagName('span')[i].onmouseover = function() {
+    mouseOver()
+    }
+
+    function mouseOver() {
+      document.getElementsByTagName('span')[i].style.color = getRandomColor();
+    }
+
+    function getRandomColor() {
+
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+    var newColor = getRandomColor(); // #E943F0
+
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+
+    </script>
 </head>
 <body>
+
 <div class="container-fluid">
+    <h1 align="center" >
+        <img  src="{% static 'img/joaninha2.jpg' %}" width="50" height="50">
+        <span onmouseover="letras(0)">P</span>
+        <span onmouseover="letras(1)">o</span>
+        <span onmouseover="letras(2)">o</span>
+        <span onmouseover="letras(3)">l</span>
+        <span onmouseover="letras(4)">_</span>
+        <span onmouseover="letras(5)">B</span>
+        <span onmouseover="letras(6)">u</span>
+        <span onmouseover="letras(7)">d</span>
+        <span onmouseover="letras(8)">g</span>
+        <span onmouseover="letras(9)">e</span>
+        <span onmouseover="letras(10)">t</span>
+    </h1>
 
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            {% block sidebar %}
-                <span class="icon-bar"><a href="{% url 'index' %}">HOME</a></span>
-                <span class="icon-bar"><a href="{% url 'orcamento' %}">Lista de Orçamentos</a></span>
-                <span class="icon-bar"><a href="{% url 'cliente' %}">Lista de Clientes</a></span>
-                <span class="icon-bar"><a href="http://127.0.0.1:8000/admin">ADMIN</a></span>
-            {% endblock %}
-            <a class="navbar-brand" href="#">Logo</a>
-        </div>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+            <span><a class="navbar-brand" href="{% url 'index' %}">HOME</a></span>
+            <span><a class="navbar-brand" href="{% url 'orcamento' %}">Lista de Orçamentos</a></span>
+            <span><a class="navbar-brand" href="{% url 'cliente' %}">Lista de Clientes</a></span>
+            <span><a class="navbar-brand" href="http://127.0.0.1:8000/admin">ADMIN</a></span>
     </nav>
-
 
     <div class="col-sm-8 ">{% block content %}{% endblock %}</div>
         {% block pagination %}

@@ -1,20 +1,46 @@
 {% extends "base_generic.html" %}
-{% load bootstrap%}
+{% load crispy_forms_tags %}
 {% block content %}
+<br xmlns="http://www.w3.org/1999/html">
 <br>
-<br>
-  <h1>Pool Budget</h1>
-  <h2>New post</h2>
-    <form method="post">{% csrf_token %}
-            {{ form.cliente | bootstrap_horizontal }}
-            {{ form.espessura | bootstrap_horizontal }}
-            {{ form.fornecedor | bootstrap_horizontal }}
-            {{ form.comprimento | bootstrap_horizontal }}
-            {{ form.largura | bootstrap_horizontal }}
-            {{ form.prof_inicial | bootstrap_horizontal }}
-            {{ form.prof_final | bootstrap_horizontal }}
-            {{ form.largura_calcada | bootstrap_horizontal }}
-      <button type="submit" class="btn btn-primary">Submit</button>
+
+<div class="container">
+    <form class="form" method="post">{% csrf_token %}
+        <fieldset >
+        <legend>Formulário</legend>
+        <div class="form-group">
+            {{ form.cliente|as_crispy_field }}<br>
+            <div class="select">
+                <div>
+                    <label>Espessura do Vinil:</label>
+                    {{ form.espessura }}
+                </div>
+                <div>
+                    <label>Fornecedor:</label>
+                    {{ form.fornecedor }}
+                </div>
+            </div >
+            <div class="medidas">
+                <div class="input">
+                    {{ form.comprimento |as_crispy_field }}
+                </div>
+                <div class="input">
+                    {{ form.largura|as_crispy_field  }}
+                </div>
+                <div class="input">
+                    {{ form.prof_inicial|as_crispy_field  }}
+                </div>
+                <div class="input">
+                    {{ form.prof_final|as_crispy_field }}
+                </div>
+                <div class="input">
+                    {{ form.largura_calcada|as_crispy_field }}
+            </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
     </form>
+</div>
 
 {% endblock %}

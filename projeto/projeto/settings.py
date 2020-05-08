@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'front',
-    'bootstrapform',
+    'crispy_forms',
     'debug_toolbar',
-
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 THIRD_PARTY_APPS = [
   'localflavor',
@@ -126,7 +126,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+
+STATICFILES_DIRS = [
+    'statics',
+]
+
 STATIC_URL = '/static/'
+
 INTERNAL_IPS = ['127.0.0.1']
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'

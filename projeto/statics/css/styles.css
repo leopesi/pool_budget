@@ -1,0 +1,22 @@
+
+fieldset{
+height: auto;
+}
+
+.medidas{
+
+width: 55%;
+border-bottom: 1mm ridge rgb(170, 50, 220, .1);
+display: flex;
+justify-content: space-between;
+}
+
+.input{
+margin: 0 15px;
+}
+
+.select {
+width: 30%;
+display: flex;
+justify-content: space-between;
+}
