@@ -1,4 +1,4 @@
-    function letras(i) {
+function letras(i) {
 
       document.getElementsByTagName('span')[i].onmouseover = function() {
     mouseOver()

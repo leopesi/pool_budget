@@ -2,11 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import DimensaoModel, ClienteModel
 
-
 class DimensaoForm(ModelForm):
-    cliente = forms.ModelChoiceField(queryset=ClienteModel.objects.all(),
-                                     to_field_name="estado",
-                                     )
 
     espessura = forms.CharField(
         widget=forms.RadioSelect(choices=[
@@ -47,9 +43,29 @@ class DimensaoForm(ModelForm):
 
     class Meta:
         model = DimensaoModel
-        fields = ('cliente', 'comprimento', 'largura', 'prof_inicial', 'prof_final', 'largura_calcada', 'espessura', 'fornecedor')
+        fields = ( 'comprimento', 'largura', 'prof_inicial', 'prof_final', 'largura_calcada', 'espessura', 'fornecedor')
 
 class OrcamentoUpdateForm(ModelForm):
     class Meta:
         model = DimensaoModel
-        exclude = ('cliente',)
+        exclude = ('cliente', 'preco', 'produto')
+
+class ClienteForm(ModelForm):
+    numero_casa = forms.FloatField(
+        label='Número',
+        required=False,
+    )
+
+    class Meta:
+        model = ClienteModel
+        fields = ('nome',
+                  'sobrenome',
+                  'estado',
+                  'cidade',
+                  'bairro',
+                  'rua',
+                  'numero_casa',
+                  'cep',
+                  'telefone',
+                  'email')
+

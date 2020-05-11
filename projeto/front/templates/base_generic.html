@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load my_tags %}
+{% load static %}
 <html lang="pt-br">
 <head>
   {% block title %}<title>Pool Budget</title>{% endblock %}
@@ -8,40 +9,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'js/scripts.js' %}">
-    <script>
 
-    //JavaScrip
-
-    //////////////////////////////////////////////////////////////////////////////
-
-    function letras(i) {
-
-      document.getElementsByTagName('span')[i].onmouseover = function() {
-    mouseOver()
-    }
-
-    function mouseOver() {
-      document.getElementsByTagName('span')[i].style.color = getRandomColor();
-    }
-
-    function getRandomColor() {
-
-        var letters = "0123456789ABCDEF";
-        var color = "#";
-        for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-    var newColor = getRandomColor(); // #E943F0
-
-    }
-    ////////////////////////////////////////////////////////////////////////////////
-
-    </script>
 </head>
 <body>
 
@@ -93,5 +62,6 @@
         <p> Desenvolvido com Django 3.0.3 por Leonardo Pereira - <a href="https://github.com/leopesi">GitHub</a></p>
         <p>{% current_time "%Y-%m-%d %I:%M %p" as the_time %} Hora do Servidor {{ the_time }}</p>
     </footer>
+<script src="{% static 'js/color_letters.js' %}"></script>
 </body>
 </html>

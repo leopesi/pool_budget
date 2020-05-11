@@ -19,7 +19,7 @@ class ClienteModel(models.Model):
     numero_casa = models.CharField(max_length=6, blank=True)
     cep = models.CharField(max_length=20, blank=True)
     #cep = BRPostalCodeField(max_length=9, blank=True)
-    telefone= models.CharField(max_length=15, blank=True)
+    telefone= models.IntegerField(max_length=15, blank=True)
     email = models.EmailField(max_length = 50, blank=True, help_text='Ex. clinte@gmail.com')
 
     @property
@@ -30,7 +30,7 @@ class ClienteModel(models.Model):
         ordering = ['nome', 'sobrenome']
 
     def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
+        """Returns the url to access a particular instance."""
         return reverse('cliente-id', args=[str(self.id)])
 
     def __str__(self):
@@ -102,7 +102,7 @@ class DimensaoModel(models.Model):
         self.save()
 
     def get_absolute_url(self):
-        """Returns the url to access a detail record for this book."""
+        """Returns the url to access a detailed."""
         return reverse('orcamento-id', args=[str(self.id)])
 
     def __str__(self):

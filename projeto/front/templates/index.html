@@ -7,38 +7,82 @@
 <div class="container">
     <form class="form" method="post">{% csrf_token %}
         <fieldset >
-        <legend>Formulário</legend>
-        <div class="form-group">
-            {{ form.cliente|as_crispy_field }}<br>
+
+            <legend>Dados do Cliente</legend>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                       {{ cliente_form.nome|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                       {{ cliente_form.sobrenome|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                       {{ cliente_form.cidade|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-2 mb-0">
+                       {{ cliente_form.estado|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                       {{ cliente_form.bairro|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                       {{ cliente_form.rua|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-2 mb-0">
+                       {{ cliente_form.numero_casa|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-4 mb-0">
+                       {{ cliente_form.cep|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-5 mb-0">
+                       {{ cliente_form.telefone|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-7 mb-0">
+                       {{ cliente_form.email|as_crispy_field }}
+                </div>
+
+            </div>
+
+            <legend>Dados da Piscina</legend>
             <div class="select">
                 <div>
                     <label>Espessura do Vinil:</label>
-                    {{ form.espessura }}
+                    {{ dimensao_form.espessura }}
                 </div>
                 <div>
                     <label>Fornecedor:</label>
-                    {{ form.fornecedor }}
+                    {{ dimensao_form.fornecedor }}
                 </div>
             </div >
-            <div class="medidas">
-                <div class="input">
-                    {{ form.comprimento |as_crispy_field }}
+
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-0">
+                    {{ dimensao_form.comprimento |as_crispy_field }}
                 </div>
-                <div class="input">
-                    {{ form.largura|as_crispy_field  }}
+                <div class="form-group col-md-4 mb-0">
+                    {{ dimensao_form.largura|as_crispy_field  }}
                 </div>
-                <div class="input">
-                    {{ form.prof_inicial|as_crispy_field  }}
-                </div>
-                <div class="input">
-                    {{ form.prof_final|as_crispy_field }}
-                </div>
-                <div class="input">
-                    {{ form.largura_calcada|as_crispy_field }}
             </div>
+            <div class="form-row">
+                <div class="form-group col-md-3 mb-1">
+                    {{ dimensao_form.prof_inicial|as_crispy_field  }}
+                </div>
+                <div class="form-group col-md-3 mb-1">
+                    {{ dimensao_form.prof_final|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-3 mb-0">
+                    {{ dimensao_form.largura_calcada|as_crispy_field }}
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
         </fieldset>
     </form>
 </div>

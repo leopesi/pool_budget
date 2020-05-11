@@ -10,17 +10,25 @@ from .magic.estruturas.dimensao import Dimensao
 from .magic.objetos.filtro import Filtro
 from .magic.objetos.motor import Motor
 from .magic.objetos.vinil import Vinil
-from .forms import DimensaoForm, OrcamentoUpdateForm
-
+from .forms import DimensaoForm, OrcamentoUpdateForm, ClienteForm
+from django.http import HttpResponse
 def index(request):
     if request.method == "POST":
-         form = DimensaoForm(request.POST)
-         if form.is_valid():
-             post = form.save(commit=False)
+         dimensao_form = DimensaoForm(request.POST)
+         cliente_form = ClienteForm(request.POST)
+         if dimensao_form.is_valid() and cliente_form.is_valid():
+             post = dimensao_form.save(commit=False)
+             cliente_post = cliente_form.save()
+
+             post.cliente = cliente_post
              post.usuario = request.user
              post.data = timezone.now()
 
-             dimensoes = Dimensao(float(post.largura), float(post.comprimento), float(post.prof_inicial),float(post.prof_final) , float(post.largura_calcada))
+             dimensoes = Dimensao(float(post.largura),
+                                  float(post.comprimento),
+                                  float(post.prof_inicial),
+                                  float(post.prof_final) ,
+                                  float(post.largura_calcada))
              filtro = Filtro(dimensoes)
              motor = Motor(dimensoes)
              vinil = Vinil(post.espessura, post.fornecedor)
@@ -54,13 +62,16 @@ def index(request):
              post.instalacao_vinil = dimensoes.m2total()
 
              post.save()
-             return redirect('orcamento-id', pk=post.pk)
+             return redirect('orcamento-id',  pk=post.pk)
+
          else:
-             return render(request, 'index.html', {'form': form})
+             return HttpResponse('Erro de operação')
+
 
     else:
-        form = DimensaoForm()
-        return render(request, 'index.html', {'form': form})
+        dimensao_form = DimensaoForm()
+        cliente_form = ClienteForm()
+        return render(request, 'index.html', {'dimensao_form': dimensao_form, 'cliente_form': cliente_form})
 
 class DimensaoBulk(generic.View):
     def get(self, request):
