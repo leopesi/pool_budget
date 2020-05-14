@@ -11,15 +11,22 @@ class DimensaoForm(ModelForm):
         ['0.8', '0.8 mm'],
     ]))
 
-    fornecedor = forms.CharField(
-        widget=forms.RadioSelect(choices=[
+    fornecedor = forms.ChoiceField(
+        widget=forms.RadioSelect(), choices=[
         ['sodramar', 'Sodramar'],
         ['viniplas', 'Viniplas'],
-    ]))
+    ] )
+
 
     comprimento = forms.FloatField(
         label='Comprimento',
         help_text='Ex. 8.00',
+        required=True,
+    )
+
+    largura = forms.FloatField(
+        label='Largura',
+        help_text='Ex. 4.00',
         required=True,
     )
 
@@ -48,7 +55,9 @@ class DimensaoForm(ModelForm):
 class OrcamentoUpdateForm(ModelForm):
     class Meta:
         model = DimensaoModel
-        exclude = ('cliente', 'preco', 'produto')
+        exclude = ('cliente',
+                   'preco',
+                   'produto')
 
 class ClienteForm(ModelForm):
     numero_casa = forms.FloatField(

@@ -1,30 +1,71 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<br>
-<br>
-  <h1>{{ object.nome }}</h1>
+
 {% if update_cliente %}
 
 {{ form.source }}
+<div class="container-fluid">
 
-  <h4><strong>INFORMAÇÕES CADASTRAIS:</strong></h4>
-      <form action="" method="post">
+  <div class="row"></div>
+  <h1>Informações Cadastrais</h1>
+
+  <form action="" method="post">
         {% csrf_token %}
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><b>Nome:</b> {{ form.nome }} </li>
-          <li class="list-group-item"><b>Sobrenome:</b> {{ form.sobrenome }}</li>
-          <li class="list-group-item"><b>Estado:</b> {{ form.estado }}</li>
-          <li class="list-group-item"><b>Cidade:</b> {{ form.cidade }}</li>
-          <li class="list-group-item"><b>Bairro:</b> {{ form.bairro }}</li>
-          <li class="list-group-item"><b>Rua:</b> {{ form.rua }}</li>
-          <li class="list-group-item"><b>N°:</b> {{ form.numero_casa }}</li>
-          <li class="list-group-item"><b>Cep:</b> {{ form.cep }}</li>
-          <li class="list-group-item"><b>Telefone:</b> {{ form.telefone }}</li>
-          <li class="list-group-item"><b>E-mail:</b> {{ form.email }}</li>
-        </ul>
-        <input type="submit" value="Submit">
-      </form>
+    <div class="row">
+        <div class="col-md-8 col-xs-8 col-sm-8">
+            <b> Nome:</b>{{ form.nome }} <b> Sobrenome: </b>{{ form.sobrenome }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+            <b> Cidade:</b> {{ form.cidade }} - <b> Estado: </b>{{ form.estado }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+            <b> Endereço: </b>{{ form.rua }}, <b> Número: </b>{{ form.numero_casa }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+            <b> Bairro:</b> {{ form.bairro }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+          <b> CEP:</b> {{ form.cep }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+          <b>Telefone:</b> {{ form.telefone }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+          <b>Email:</b> {{ form.email }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+<br>
+    <div class="col-md-1 col-xs-1 col-sm-1">
+      <input type="submit" value="Submit">
+    </div>
+
+  </form>
+</div>
 
 {% else %}
   <p>Objeto não encontrado.</p>

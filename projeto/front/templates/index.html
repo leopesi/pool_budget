@@ -1,14 +1,11 @@
 {% extends "base_generic.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<br xmlns="http://www.w3.org/1999/html">
-<br>
 
 <div class="container">
     <form class="form" method="post">{% csrf_token %}
         <fieldset >
-
-            <legend>Dados do Cliente</legend>
+            <legend>Cliente</legend>
             <div class="form-row">
                 <div class="form-group col-md-6 mb-0">
                        {{ cliente_form.nome|as_crispy_field }}
@@ -46,10 +43,9 @@
                 <div class="form-group col-md-7 mb-0">
                        {{ cliente_form.email|as_crispy_field }}
                 </div>
-
             </div>
 
-            <legend>Dados da Piscina</legend>
+            <legend>Piscina</legend>
             <div class="select">
                 <div>
                     <label>Espessura do Vinil:</label>
@@ -60,29 +56,27 @@
                     {{ dimensao_form.fornecedor }}
                 </div>
             </div >
-
             <div class="form-row">
-                <div class="form-group col-md-4 mb-0">
+                <div class="form-group col-md-4 mb-0 ">
                     {{ dimensao_form.comprimento |as_crispy_field }}
                 </div>
                 <div class="form-group col-md-4 mb-0">
                     {{ dimensao_form.largura|as_crispy_field  }}
+
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3 mb-1">
+                <div class="form-group col-md-3 mb-0">
                     {{ dimensao_form.prof_inicial|as_crispy_field  }}
                 </div>
-                <div class="form-group col-md-3 mb-1">
+                <div class="form-group col-md-3 mb-0">
                     {{ dimensao_form.prof_final|as_crispy_field }}
                 </div>
                 <div class="form-group col-md-3 mb-0">
                     {{ dimensao_form.largura_calcada|as_crispy_field }}
                 </div>
             </div>
-
             <button type="submit" class="btn btn-primary">Submit</button>
-
         </fieldset>
     </form>
 </div>

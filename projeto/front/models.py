@@ -49,12 +49,9 @@ class DimensaoModel(models.Model):
     largura_calcada = models.FloatField(max_length=3, null=False, blank=True, default= 1, help_text='Ex. 1.00')
     espessura = models.CharField(max_length=3)
     fornecedor = models.CharField(max_length=8)
-
     '''DIMENSÕES'''
     produto = models.CharField(max_length=25, null=False, blank=False, default= 0)
     preco = models.CharField(max_length=25, null=False, blank=False, default= 0)
-
-
 
     profundidade_media = models.CharField(max_length=25)
     area_calcada = models.CharField(max_length=25)

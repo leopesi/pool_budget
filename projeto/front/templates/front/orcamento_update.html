@@ -1,14 +1,56 @@
 {% extends "base_generic.html" %}
 {% load filters %}
 {% block content %}
-<br>
-<br>
 {{ form.source }}
-<h1>{{ object.cliente }}</h1>
-<li>{{ object.cliente.cidade }}</li>
-<li>{{ object.cliente.rua }}, {{ object.cliente.numero_casa }}</li>
-<li>{{ object.cliente.telefone }}</li>
-<li>{{ object.cliente.email }}</li>
+<div class="container-fluid">
+
+  <div class="row"></div>
+
+    <div class="row">
+        <div class="col-md-8 col-xs-8 col-sm-8">
+            <p class="h4">
+            <h2>{{ object.cliente.nome_completo }}</h2>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+        <b> Cidade:</b> {{ object.cliente.cidade }} - {{ object.cliente.estado }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+        <b> Endereço: </b>{{ object.cliente.rua }}, {{ object.cliente.numero_casa }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+        <b> Bairro:</b> {{ object.cliente.bairro }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+          <b> CEP:</b> {{ object.cliente.cep }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+          <b>Telefone:</b> {{ object.cliente.telefone }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+          <b>Email:</b> {{ object.cliente.email }}
+        </div>
+    </div>
+</div>
+<br>
 <form action="" method="post">
     <table class="table">
       <thead class="thead-light">
