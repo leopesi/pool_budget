@@ -1,0 +1,68 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if update_produto %}
+
+{{ form.source }}
+<div class="container-fluid">
+<form action="" method="post">{% csrf_token %}
+<div class="row"></div>
+  <h1>Produto</h1>
+
+    <div class="row">
+        <div class="col-md-8 col-xs-8 col-sm-8">
+            <p class="h4">
+            <h3>{{ form.produto }}</h3>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+            <b> Custo:</b> {{ form.custo }} - <b> Margem:</b> {{ form.margem }} - <b> Preço:</b> {{ form.preco }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+            <b> Fornecedor: </b>{{ form.fornecedor }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+            <b> Marca:</b> {{ form.marca }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+          <b> Modelo:</b> {{ form.modelo }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+          <b>Característica:</b> {{ form.caracteristica }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+<br>
+
+<input type="submit" value="Submit">
+</form>
+</div>
+
+{% else %}
+  <p>Objeto não encontrado.</p>
+{% endif %}
+
+
+
+
+{% endblock %}

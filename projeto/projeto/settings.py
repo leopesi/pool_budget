@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'front',
+    'preco',
     'crispy_forms',
     'debug_toolbar',
 ]

@@ -1,0 +1,77 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if lista_produto %}
+
+<div class="container-fluid">
+
+  <div class="row"></div>
+  <h1>Produto</h1>
+
+    <div class="row">
+        <div class="col-md-8 col-xs-8 col-sm-8">
+            <p class="h4">
+            <h3>{{ object.produto }}</h3>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+            <b> Custo:</b> {{ object.custo }} - <b> Margem:</b> {{ object.margem }} - <b> Preço:</b> {{ object.preco }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+            <b> Fornecedor: </b>{{ object.fornecedor }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+            <b> Marca:</b> {{ object.marca }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+          <b> Modelo:</b> {{ object.modelo }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-xs-10 col-sm-10">
+          <b>Característica:</b> {{ object.caracteristica }}
+        </div>
+      <div class="col-md-1 col-xs-1 col-sm-1"></div>
+    </div>
+<br>
+    <div class="col-md-1 col-xs-1 col-sm-1">
+        <a href="{% url 'produto_update' object.pk %}">
+            <button type="button" class="btn btn-info">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </a>
+    </div>
+    <div class="col-md-1 col-xs-1 col-sm-1">
+        <a href="{% url 'produto_delete' object.pk %}">
+            <button onclick="return confirm('Are you sure?');" type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </a>
+    </div>
+
+</div>
+
+
+{% else %}
+  <p>Objeto não encontrado.</p>'
+{% endif %}
+
+{% endblock %}

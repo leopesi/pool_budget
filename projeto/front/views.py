@@ -11,7 +11,7 @@ from .magic.objetos.filtro import Filtro
 from .magic.objetos.motor import Motor
 from .magic.objetos.vinil import Vinil
 from .forms import DimensaoForm, OrcamentoUpdateForm, ClienteForm
-from django.http import HttpResponse
+
 def index(request):
     if request.method == "POST":
          dimensao_form = DimensaoForm(request.POST)
@@ -133,9 +133,11 @@ class OrcamentoUpdateView(generic.UpdateView): # todo: Testar o fields com '__al
 class OrcamentoDeleteView(generic.DeleteView):
     model = DimensaoModel
     fields = '__all__'
-    success_url = reverse_lazy('orcamento') #Se confirmado o delete, redireciona para a página orcamento
+    success_url = reverse_lazy('orcamento') #Se confirmado o delete, redireciona para a página orcamento.
     context_object_name = 'delete_orcamento'
-    template_name = 'front/orcamento_confirm_delete.html'
+    #template_name = 'front/orcamento_list.html'
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)
 
 #-----------------------CLIENTE------------------------------#
 
@@ -171,3 +173,6 @@ class ClienteDeleteView(generic.DeleteView):
 
     def get_success_url(self): #Permite personalizar a visualização
         return reverse_lazy('cliente')
+
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)

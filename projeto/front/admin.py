@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import ClienteModel, DimensaoModel
+from .actions import negociação, contrato, encerrado
 
 # Register your models here.
 @admin.register(ClienteModel)
@@ -9,7 +10,7 @@ class ClienteAdmin(admin.ModelAdmin):
 
 @admin.register(DimensaoModel)
 class DimensaoAdmin(admin.ModelAdmin):
-    ''' readonly_fields = ('data','cliente')
+    readonly_fields = ('data','cliente')
     fieldsets = (
         ('Cabeçalho',{
             'fields': ('cliente','status','data')
@@ -41,6 +42,9 @@ class DimensaoAdmin(admin.ModelAdmin):
     )
 
     list_display = ('cliente', 'status', 'data', 'medidas')
+    actions = [negociação, contrato, encerrado]
+
+
 
     def medidas(self, obj):
         if obj.comprimento and obj.largura and obj.profundidade_media:
@@ -51,7 +55,7 @@ class DimensaoAdmin(admin.ModelAdmin):
 
     list_filter = ('usuario', 'status', 'cliente', 'cliente__bairro','data',)
     search_fields = ('cliente',)
-'''
+
 admin.site.site_header = "Painel de Controle"
 admin.site.index_title = "Configurações"
 admin.site.site_title = " "

@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import ProdutoModel, ServicoModel
 
-# Register your models here.
+
+class ProdutoInline(admin.TabularInline):
+    model=ProdutoModel
+
+admin.site.register(ProdutoModel)
+admin.site.register(ServicoModel)

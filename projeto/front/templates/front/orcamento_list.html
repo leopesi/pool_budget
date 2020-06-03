@@ -22,13 +22,15 @@
             <td>{{ orcamento.status }}</td>
             <td>{{ orcamento.data }}</td>
             <td>
+
                 <div class="col-md-1 col-xs-1 col-sm-1">
                     <a href="{% url 'orcamento_delete' orcamento.pk %}">
-                        <button type="button" class="btn btn-danger">
+                        <button onclick="return confirm('Are you sure?');" type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </a>
                 </div>
+
             </td>
           </tr>
 
