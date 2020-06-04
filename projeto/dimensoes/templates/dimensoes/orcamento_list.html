@@ -1,0 +1,52 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Orçamentos</h1>
+<hr>
+{% if lista_orcamento %}
+
+    <table class="table">
+      <thead class="thead-light">
+      <tr>
+        <th scope="col">Cliente</th>
+        <th scope="col">Vendedor</th>
+        <th scope="col">Status</th>
+        <th scope="col">Data</th>
+        <th></th>
+      </tr>
+      </thead>
+      {% for orcamento in lista_orcamento %}
+          <tr>
+            <td><a href="{{ orcamento.get_absolute_url }}">{{ orcamento.cliente.nome_completo }}</a></td>
+            <td>{{ orcamento.usuario }}</td>
+            <td>{{ orcamento.status }}</td>
+            <td>{{ orcamento.data }}</td>
+            <td>
+
+                <div class="col-md-1 col-xs-1 col-sm-1">
+                    <a href="{% url 'orcamento_delete' orcamento.pk %}">
+                        <button onclick="return confirm('Are you sure?');" type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </a>
+                </div>
+
+            </td>
+          </tr>
+
+      {% endfor %}
+    </table>
+<hr>
+
+    {% else %}
+      <p>Lista Vazia</p>
+    {% endif %}
+
+        <div class="col-md-1 col-xs-1 col-sm-1">
+            <a href="{% url 'index' %}">
+          <button type="button" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button></a>
+        </div>
+
+{% endblock %}

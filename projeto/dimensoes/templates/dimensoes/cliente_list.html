@@ -1,0 +1,51 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Clientes</h1>
+<hr>
+{% if lista_cliente %}
+
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Bairro/Condomínio</th>
+          <th scope="col">Rua</th>
+          <th></th>
+        </tr>
+      </thead>
+      {% for cliente in lista_cliente %}
+        <tr>
+          <td><a href="{{ cliente.get_absolute_url }}">{{ cliente.nome_completo|title }} </a>  </td>
+          <td>{{ cliente.cidade|title }}</td>
+          <td>{{ cliente.bairro|title }}</td>
+          <td>{{ cliente.rua|title }}, {{ cliente.numero_casa }}</td>
+
+          <td>
+            <div class="col-md-1 col-xs-1 col-sm-1">
+                <a href="{% url 'cliente_delete' cliente.pk %}">
+                    <button onclick="return confirm('Are you sure?');" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </a>
+            </div>
+          </td>
+        </tr>
+
+      {% endfor %}
+    </table>
+<hr>
+
+    {% else %}
+      <p>Erro na Página</p>
+    {% endif %}
+
+        <div class="col-md-1 col-xs-1 col-sm-1">
+            <a href="{% url 'cliente_create' %}">
+          <button type="button" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button></a>
+        </div>
+
+{% endblock %}
