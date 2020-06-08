@@ -4,9 +4,6 @@ width: 55%;
 height: auto;
 }
 
-.cliente{
-
-
 }
 .medidas{
 
@@ -24,4 +21,28 @@ justify-content: space-between;
 width: 80%;
 display: flex;
 justify-content: space-between;
+}
+
+UL.col3
+{
+PADDING-RIGHT: 0px;
+PADDING-LEFT: 0px;
+FLOAT: left;
+PADDING-BOTTOM: 0px;
+MARGIN: 10px 0px;
+WIDTH: 100%;
+PADDING-TOP: 0px;
+LIST-STYLE-TYPE: none
+}
+
+UL.col3 LI
+{
+border-RIGHT: 0px;
+DISPLAY: inline;
+border-LEFT: 0px;
+FLOAT: left;
+PADDING-BOTTOM: 0px;
+MARGIN: 0px 0px;
+WIDTH: 30%;
+border-TOP: 0px
 }

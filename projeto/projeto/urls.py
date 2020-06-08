@@ -21,9 +21,9 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # Redireciona a URL raiz do site para front
-    path('', include('front.urls')),
-    path('', include('preco.urls')),
+    # Redireciona a URL raiz do site para dimensoes
+    path('', include('dimensoes.urls')),
+
 
     path('accounts/', include('django.contrib.auth.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
