@@ -1,6 +1,6 @@
-def negociação(modeladmin, request, queryset):
+def negociacao(modeladmin, request, queryset):
     queryset.update(status='Em negociação')
-negociação.short_description = "Em negociação"
+negociacao.short_description = "Em negociação"
 
 def contrato(modeladmin, request, queryset):
     queryset.update(status='Contrato')

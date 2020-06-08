@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import ClienteModel, DimensaoModel
-from .actions import negociação, contrato, encerrado
+from .actions import negociacao, contrato, encerrado
 
 # Register your models here.
 @admin.register(ClienteModel)
@@ -33,7 +33,7 @@ class DimensaoAdmin(admin.ModelAdmin):
     )
 
     list_display = ('cliente', 'status', 'data', 'medidas')
-    actions = [negociação, contrato, encerrado]
+    actions = [negociacao, contrato, encerrado]
 
 
 
