@@ -6,14 +6,14 @@ from .actions import negociacao, contrato, encerrado
 @admin.register(ClienteModel)
 class ClienteAdmin(admin.ModelAdmin):
     list_display = ('nome_completo', 'cidade',  'rua', 'numero_casa', 'telefone', 'email')
-    list_filter = ('nome', 'cidade', 'bairro', )
+    list_filter = ('nome', 'cidade', 'bairro', )#'status'
 
 @admin.register(DimensaoModel)
 class DimensaoAdmin(admin.ModelAdmin):
     readonly_fields = ('data','cliente')
     fieldsets = (
         ('Cabeçalho',{
-            'fields': ('cliente','status','data')
+            'fields': ('cliente','data')
           }),
         ('Formulário', {
             'fields': ('espessura', 'fornecedor', 'comprimento', 'largura', 'prof_inicial','prof_final', 'largura_calcada')
@@ -32,7 +32,7 @@ class DimensaoAdmin(admin.ModelAdmin):
 
     )
 
-    list_display = ('cliente', 'status', 'data', 'medidas')
+    list_display = ('cliente',  'data', 'medidas')
     actions = [negociacao, contrato, encerrado]
 
 
@@ -44,7 +44,7 @@ class DimensaoAdmin(admin.ModelAdmin):
             return 'Sem medidas'
     medidas.short_description = 'Medidas'
 
-    list_filter = ('usuario', 'status', 'cliente', 'cliente__bairro','data',)
+    list_filter = ('usuario',  'cliente', 'cliente__bairro','data',) #'status'
     search_fields = ('cliente',)
 
 admin.site.site_header = "Painel de Controle"

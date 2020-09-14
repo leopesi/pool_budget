@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'graphene_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,9 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dimensoes',
+    #'projeto.projeto.dimensoes',
     'crispy_forms',
     'debug_toolbar',
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'dimensoes.schema.schema'
+}
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 THIRD_PARTY_APPS = [

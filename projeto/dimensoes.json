@@ -1,0 +1,18 @@
+[
+  {
+    "model": "clientes.clientemodel",
+    "pk": 1,
+    "fields": {
+      "nome": "Joaninha",
+      "telefone": "32410145"
+    }
+  },
+  {
+    "model": "clientes.clientemodel",
+    "pk": 2,
+    "fields": {
+      "nome": "Irineu Nego",
+      "telefone": "32410145"
+    }
+  }
+]

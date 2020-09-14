@@ -6,10 +6,6 @@ from django.utils import timezone
 from django.shortcuts import redirect
 
 from .models import ClienteModel, DimensaoModel
-from .customclass.estruturas.dimensao import Dimensao
-from .customclass.objetos.filtro import Filtro
-from .customclass.objetos.motor import Motor
-from .customclass.objetos.vinil import Vinil
 from .forms import DimensaoForm, OrcamentoUpdateForm, ClienteForm
 
 def index(request):

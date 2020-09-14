@@ -15,9 +15,9 @@ class ClienteModel(models.Model):
     cidade = models.CharField(max_length=20, blank=True)
     bairro = models.CharField(max_length=20, blank=True)
     rua = models.CharField(max_length=100, blank=True)
-    numero_casa = models.CharField(max_length=6, blank=True)
+    numero_casa = models.CharField(max_length=10, blank=True)
     cep = models.CharField(max_length=20, blank=True)
-    telefone= models.IntegerField(blank=True)
+    telefone = models.IntegerField(blank=True, default=0)
     email = models.EmailField(max_length = 50, blank=True, help_text='Ex. clinte@gmail.com')
 
     @property
@@ -64,9 +64,8 @@ class DimensaoModel(models.Model):
     tampa_casa_maquinas = models.CharField(max_length=30)
     sacos_areia = models.CharField(max_length=30)
 
-
-    BUDGET_STATUS = (('Em negociação', 'Em negociação'), ('Contrato', 'Contrato'), ('Encerrado', 'Encerrado'),)
-    status = models.CharField(max_length=15, choices=BUDGET_STATUS, blank=True, default='Em negociação', help_text='Status do Orçamento',)
+    #BUDGET_STATUS = (('Em negociação', 'Em negociação'), ('Contrato', 'Contrato'), ('Encerrado', 'Encerrado'),)
+    status = models.CharField(max_length=15, choices=(('Em negociação', 'Em negociação'), ('Contrato', 'Contrato'), ('Encerrado', 'Encerrado')), blank=True, default='Em negociação', help_text='Status do Orçamento',)
     data = models.DateTimeField(blank=True, null=True)
 
     def prof_media(self, *args, **kwargs):
@@ -88,7 +87,7 @@ class DimensaoModel(models.Model):
         self.filtro = filtro.dimensionamento_filtro_grupo()['marca'].title() + ' ' + \
                       filtro.dimensionamento_filtro_grupo()['modelo']
         self.motobomba = motor.dimensionamento_motobomba_grupo()['marca'].title() + ' - ' + \
-                         motor.dimensionamento_motobomba_grupo()['modelo']
+                      motor.dimensionamento_motobomba_grupo()['modelo']
         self.tampa_casa_maquinas = filtro.dimensionamento_tampa_casa_de_maquinas_grupo()['modelo']
         self.sacos_areia = filtro.quantidade_de_areia_no_filtro()
 
