@@ -61,8 +61,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-]
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
+]
 ROOT_URLCONF = 'projeto.urls'
 
 TEMPLATES = [
@@ -133,11 +134,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATICFILES_DIRS = [
+    'statics',
+]
 
 STATIC_URL = '/static/'
 
