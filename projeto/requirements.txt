@@ -3,7 +3,7 @@ astroid~=2.3.3
 certifi==2019.11.28
 chardet==3.0.4
 colorama==0.4.3
-Django==3.0.3
+Django==3.1.14
 django-bootstrap-form==3.4
 django-crispy-forms==1.8.1
 django-debug-toolbar==2.2
@@ -26,7 +26,7 @@ requests==2.22.0
 six~=1.12
 sqlparse==0.3.0
 uploader==0.4.1
-urllib3==1.25.8
+urllib3==1.26.5
 virtualenv==16.7.9
 wrapt==1.11.2
 zope.component==4.6
