@@ -26,7 +26,7 @@ requests==2.22.0
 six==1.11.0
 sqlparse==0.3.0
 uploader==0.4.1
-urllib3==1.25.8
+urllib3==1.26.5
 virtualenv==16.7.9
 wrapt==1.11.2
 zope.component==4.6
