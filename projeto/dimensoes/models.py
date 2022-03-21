@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.urls import reverse # Used to generate URLs by reversing the URL patterns
+from django.urls import (
+    reverse,
+)   # Used to generate URLs by reversing the URL patterns
 from django.utils import timezone
 from .customclass.estruturas.dimensao import Dimensao
 from .customclass.objetos.filtro import Filtro
 from .customclass.objetos.motor import Motor
+
 
 class ClienteModel(models.Model):
     """Modelo representando as informações de cadastro do cliente."""
@@ -18,7 +21,9 @@ class ClienteModel(models.Model):
     numero_casa = models.CharField(max_length=10, blank=True)
     cep = models.CharField(max_length=20, blank=True)
     telefone = models.IntegerField(blank=True, default=0)
-    email = models.EmailField(max_length = 50, blank=True, help_text='Ex. clinte@gmail.com')
+    email = models.EmailField(
+        max_length=50, blank=True, help_text='Ex. clinte@gmail.com'
+    )
 
     @property
     def nome_completo(self):
@@ -35,21 +40,34 @@ class ClienteModel(models.Model):
         """String representando o objeto."""
         return f'{self.nome}, {self.sobrenome}'
 
+
 class DimensaoModel(models.Model):
-    cliente = models.ForeignKey(ClienteModel, on_delete=models.SET_NULL, null=True)
+    cliente = models.ForeignKey(
+        ClienteModel, on_delete=models.SET_NULL, null=True
+    )
     usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     """INPUT da piscina."""
-    comprimento = models.FloatField(max_length=3, null=False, blank=False, help_text='Ex. 8.00', default=0)
-    largura = models.FloatField(max_length=5, null=False, blank=False, help_text='Ex. 4.00', default=0)
+    comprimento = models.FloatField(
+        max_length=3, null=False, blank=False, help_text='Ex. 8.00', default=0
+    )
+    largura = models.FloatField(
+        max_length=5, null=False, blank=False, help_text='Ex. 4.00', default=0
+    )
     prof_inicial = models.FloatField(max_length=5)
-    prof_final = models.FloatField(max_length=3, null=False, blank=False, help_text='Ex. 1.40', default=0)
-    largura_calcada = models.FloatField(max_length=3, null=False, blank=True, default= 1, help_text='Ex. 1.00')
+    prof_final = models.FloatField(
+        max_length=3, null=False, blank=False, help_text='Ex. 1.40', default=0
+    )
+    largura_calcada = models.FloatField(
+        max_length=3, null=False, blank=True, default=1, help_text='Ex. 1.00'
+    )
     espessura = models.CharField(max_length=3)
     fornecedor = models.CharField(max_length=8)
 
-    '''DIMENSÕES'''
-    profundidade_media = models.CharField(max_length=25, null=False, blank=False, default= 0)
+    """DIMENSÕES"""
+    profundidade_media = models.CharField(
+        max_length=25, null=False, blank=False, default=0
+    )
     area_calcada = models.CharField(max_length=25)
     perimetro = models.CharField(max_length=25)
     m2_facial = models.CharField(max_length=25)
@@ -64,16 +82,28 @@ class DimensaoModel(models.Model):
     tampa_casa_maquinas = models.CharField(max_length=30)
     sacos_areia = models.CharField(max_length=30)
 
-    #BUDGET_STATUS = (('Em negociação', 'Em negociação'), ('Contrato', 'Contrato'), ('Encerrado', 'Encerrado'),)
-    status = models.CharField(max_length=15, choices=(('Em negociação', 'Em negociação'), ('Contrato', 'Contrato'), ('Encerrado', 'Encerrado')), blank=True, default='Em negociação', help_text='Status do Orçamento',)
+    # BUDGET_STATUS = (('Em negociação', 'Em negociação'), ('Contrato', 'Contrato'), ('Encerrado', 'Encerrado'),)
+    status = models.CharField(
+        max_length=15,
+        choices=(
+            ('Em negociação', 'Em negociação'),
+            ('Contrato', 'Contrato'),
+            ('Encerrado', 'Encerrado'),
+        ),
+        blank=True,
+        default='Em negociação',
+        help_text='Status do Orçamento',
+    )
     data = models.DateTimeField(blank=True, null=True)
 
     def prof_media(self, *args, **kwargs):
-        dimensoes = Dimensao(self.largura,
-                             self.comprimento,
-                             self.prof_inicial,
-                             self.prof_final,
-                             self.largura_calcada)
+        dimensoes = Dimensao(
+            self.largura,
+            self.comprimento,
+            self.prof_inicial,
+            self.prof_final,
+            self.largura_calcada,
+        )
         filtro = Filtro(dimensoes)
         motor = Motor(dimensoes)
         self.profundidade_media = dimensoes.profundidade_media()
@@ -84,16 +114,23 @@ class DimensaoModel(models.Model):
         self.m2_total = dimensoes.m2total()
         self.m3_total = dimensoes.m3total()
         self.m3_real = dimensoes.m3real()
-        self.filtro = filtro.dimensionamento_filtro_grupo()['marca'].title() + ' ' + \
-                      filtro.dimensionamento_filtro_grupo()['modelo']
-        self.motobomba = motor.dimensionamento_motobomba_grupo()['marca'].title() + ' - ' + \
-                      motor.dimensionamento_motobomba_grupo()['modelo']
-        self.tampa_casa_maquinas = filtro.dimensionamento_tampa_casa_de_maquinas_grupo()['modelo']
+        self.filtro = (
+            filtro.dimensionamento_filtro_grupo()['marca'].title()
+            + ' '
+            + filtro.dimensionamento_filtro_grupo()['modelo']
+        )
+        self.motobomba = (
+            motor.dimensionamento_motobomba_grupo()['marca'].title()
+            + ' - '
+            + motor.dimensionamento_motobomba_grupo()['modelo']
+        )
+        self.tampa_casa_maquinas = (
+            filtro.dimensionamento_tampa_casa_de_maquinas_grupo()['modelo']
+        )
         self.sacos_areia = filtro.quantidade_de_areia_no_filtro()
 
         super(DimensaoModel, self).save(*args, **kwargs)
         return self.profundidade_media
-
 
     def publish(self):
         self.data = timezone.now()
@@ -106,4 +143,3 @@ class DimensaoModel(models.Model):
     def __str__(self):
         """String representando o objeto."""
         return f'{self.comprimento}, {self.largura}, {self.prof_inicial},{self.prof_final},{self.largura_calcada}'
-

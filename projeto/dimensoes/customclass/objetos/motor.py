@@ -2,7 +2,8 @@
 from .filtro import Filtro
 from .dbs.database import Database
 
-class Motor():
+
+class Motor:
     def __init__(self, dimensao):
         self.dimensao = dimensao
         self.materiais = []
@@ -12,7 +13,9 @@ class Motor():
     def add_materiais(self, material):
         self.materiais.append(material)
 
-    def dimensionamento_motobomba_grupo(self):  # Relaciona a motobomba adequada para o filtro, baseado no ID do filtro.
+    def dimensionamento_motobomba_grupo(
+        self,
+    ):  # Relaciona a motobomba adequada para o filtro, baseado no ID do filtro.
         dimensao = self.dimensao
         motobomba = self.config['motores'].lista()
         filtro = Filtro(dimensao)

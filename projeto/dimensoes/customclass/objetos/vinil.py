@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from .dbs.database import Database
 
-class Vinil():
+
+class Vinil:
     def __init__(self, espessura, fornecedor):
         self.espessura = espessura
         self.fornecedor = fornecedor
@@ -17,7 +18,7 @@ class Vinil():
         for chave in self.config['vinil']:
             if chave['fornecedor'] == fornecedor:
                 variavel.append(chave)
-        return (variavel)
+        return variavel
 
     def choose_thickness(self):
         espessura = self.espessura

@@ -44,14 +44,12 @@ INSTALLED_APPS = [
     'debug_toolbar',
 ]
 
-GRAPHENE = {
-    'SCHEMA': 'dimensoes.schema.schema'
-}
+GRAPHENE = {'SCHEMA': 'dimensoes.schema.schema'}
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 THIRD_PARTY_APPS = [
-  'localflavor',
+    'localflavor',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +68,9 @@ ROOT_URLCONF = 'projeto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

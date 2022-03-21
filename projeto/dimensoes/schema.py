@@ -5,6 +5,7 @@ from .models import ClienteModel, DimensaoModel
 # Create a GraphQL type for the actor model
 class ClienteType(DjangoObjectType):
     nome_completo = graphene.String(source='nome_completo')
+
     class Meta:
         model = ClienteModel
         fields = '__all__'
@@ -14,6 +15,7 @@ class ClienteType(DjangoObjectType):
 class DimensaoType(DjangoObjectType):
     class Meta:
         model = DimensaoModel
+
 
 # Create a Query type
 class Query(ObjectType):
@@ -43,6 +45,7 @@ class Query(ObjectType):
     def resolve_dimensoes(self, info, **kwargs):
         return DimensaoModel.objects.all()
 
+
 class ClienteInput(graphene.InputObjectType):
     id = graphene.ID()
     nome = graphene.String()
@@ -55,6 +58,7 @@ class ClienteInput(graphene.InputObjectType):
     cep = graphene.String()
     telefone = graphene.String()
     email = graphene.String()
+
 
 class DimensaoInput(graphene.InputObjectType):
     id = graphene.ID()
@@ -79,19 +83,21 @@ class CreateCliente(graphene.Mutation):
     @staticmethod
     def mutate(root, info, input=None):
         ok = True
-        cliente_instance = ClienteModel(nome=input.nome,
-                                        sobrenome=input.sobrenome,
-                                        estado=input.estado,
-                                        cidade=input.cidade,
-                                        bairro=input.bairro,
-                                        rua=input.rua,
-                                        numero_casa=input.numero_casa,
-                                        cep=input.cep,
-                                        telefone=input.telefone,
-                                        email=input.email,
-                                        )
+        cliente_instance = ClienteModel(
+            nome=input.nome,
+            sobrenome=input.sobrenome,
+            estado=input.estado,
+            cidade=input.cidade,
+            bairro=input.bairro,
+            rua=input.rua,
+            numero_casa=input.numero_casa,
+            cep=input.cep,
+            telefone=input.telefone,
+            email=input.email,
+        )
         cliente_instance.save()
         return CreateCliente(ok=ok, cliente=cliente_instance)
+
 
 class UpdateCliente(graphene.Mutation):
     class Arguments:
@@ -112,6 +118,7 @@ class UpdateCliente(graphene.Mutation):
             return UpdateCliente(ok=ok, cliente=cliente_instance)
         return UpdateCliente(ok=ok, cliente=None)
 
+
 # Create mutations for movies
 class CreateDimensao(graphene.Mutation):
     class Arguments:
@@ -125,17 +132,17 @@ class CreateDimensao(graphene.Mutation):
         ok = True
         clientes = []
         for cliente_input in input.clientes:
-          cliente = ClienteModel.objects.get(pk=cliente_input.id)
-          if cliente is None:
-            return CreateDimensao(ok=False, dimensao=None)
-          clientes.append(cliente)
+            cliente = ClienteModel.objects.get(pk=cliente_input.id)
+            if cliente is None:
+                return CreateDimensao(ok=False, dimensao=None)
+            clientes.append(cliente)
         dimensao_instance = DimensaoModel(
-          comprimento=input.comprimento,
-          largura=input.largura
-          )
+            comprimento=input.comprimento, largura=input.largura
+        )
         dimensao_instance.save()
         dimensao_instance.cliente.set(clientes)
         return CreateDimensao(ok=ok, dimensao=dimensao_instance)
+
 
 class UpdateDimensao(graphene.Mutation):
     class Arguments:
@@ -153,21 +160,23 @@ class UpdateDimensao(graphene.Mutation):
             ok = True
             clientes = []
             for cliente_input in input.dimensoes:
-              cliente = ClienteModel.objects.get(pk=cliente_input.id)
-              if cliente is None:
-                return UpdateDimensao(ok=False, dimensao=None)
-              clientes.append(cliente)
-            dimensao_instance.comprimento=input.title
-            dimensao_instance.largura=input.year
+                cliente = ClienteModel.objects.get(pk=cliente_input.id)
+                if cliente is None:
+                    return UpdateDimensao(ok=False, dimensao=None)
+                clientes.append(cliente)
+            dimensao_instance.comprimento = input.title
+            dimensao_instance.largura = input.year
             dimensao_instance.save()
             dimensao_instance.cliente.set(clientes)
             return UpdateDimensao(ok=ok, dimensao=dimensao_instance)
         return UpdateDimensao(ok=ok, dimensao=None)
+
 
 class Mutation(graphene.ObjectType):
     create_cliente = CreateCliente.Field()
     update_cliente = UpdateCliente.Field()
     create_dimensao = CreateDimensao.Field()
     update_dimensao = UpdateDimensao.Field()
+
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

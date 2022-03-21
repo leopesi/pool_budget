@@ -2,21 +2,26 @@ from django import forms
 from django.forms import ModelForm
 from .models import DimensaoModel, ClienteModel
 
+
 class DimensaoForm(ModelForm):
 
     espessura = forms.CharField(
-        widget=forms.RadioSelect(choices=[
-        ['0.6', '0.6 mm'],
-        ['0.7', '0.7 mm'],
-        ['0.8', '0.8 mm'],
-    ]))
+        widget=forms.RadioSelect(
+            choices=[
+                ['0.6', '0.6 mm'],
+                ['0.7', '0.7 mm'],
+                ['0.8', '0.8 mm'],
+            ]
+        )
+    )
 
     fornecedor = forms.ChoiceField(
-        widget=forms.RadioSelect(), choices=[
-        ['sodramar', 'Sodramar'],
-        ['viniplas', 'Viniplas'],
-    ] )
-
+        widget=forms.RadioSelect(),
+        choices=[
+            ['sodramar', 'Sodramar'],
+            ['viniplas', 'Viniplas'],
+        ],
+    )
 
     comprimento = forms.FloatField(
         label='Comprimento',
@@ -50,14 +55,22 @@ class DimensaoForm(ModelForm):
 
     class Meta:
         model = DimensaoModel
-        fields = ( 'comprimento', 'largura', 'prof_inicial', 'prof_final', 'largura_calcada', 'espessura', 'fornecedor')
+        fields = (
+            'comprimento',
+            'largura',
+            'prof_inicial',
+            'prof_final',
+            'largura_calcada',
+            'espessura',
+            'fornecedor',
+        )
+
 
 class OrcamentoUpdateForm(ModelForm):
     class Meta:
         model = DimensaoModel
-        exclude = ('cliente',
-                   'preco',
-                   'produto')
+        exclude = ('cliente', 'preco', 'produto')
+
 
 class ClienteForm(ModelForm):
     numero_casa = forms.FloatField(
@@ -67,14 +80,15 @@ class ClienteForm(ModelForm):
 
     class Meta:
         model = ClienteModel
-        fields = ('nome',
-                  'sobrenome',
-                  'estado',
-                  'cidade',
-                  'bairro',
-                  'rua',
-                  'numero_casa',
-                  'cep',
-                  'telefone',
-                  'email')
-
+        fields = (
+            'nome',
+            'sobrenome',
+            'estado',
+            'cidade',
+            'bairro',
+            'rua',
+            'numero_casa',
+            'cep',
+            'telefone',
+            'email',
+        )

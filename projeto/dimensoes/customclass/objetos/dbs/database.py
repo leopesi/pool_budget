@@ -3,7 +3,9 @@ import json
 
 class Database:
     def __init__(self, tabela):
-        self.file = open('dimensoes/customclass/objetos/dbs/' + tabela + '.json', 'r')
+        self.file = open(
+            'dimensoes/customclass/objetos/dbs/' + tabela + '.json', 'r'
+        )
         self.table = tabela
         self.db = json.dumps(ast.literal_eval(self.file.read()))
 
