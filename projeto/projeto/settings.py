@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dimensoes',
     #'projeto.projeto.dimensoes',
-    'crispy_forms',
-    'debug_toolbar',
+    #'crispy_forms',
+    #'debug_toolbar',
 ]
 
 GRAPHENE = {'SCHEMA': 'dimensoes.schema.schema'}
