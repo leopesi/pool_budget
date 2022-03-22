@@ -28,6 +28,7 @@ sqlparse==0.3.0
 uploader==0.4.1
 urllib3~=1.25.0
 virtualenv==16.7.9
+whitenoise==6.0.0
 wrapt==1.11.2
 zope.component==4.6
 zope.deferredimport==4.3.1
